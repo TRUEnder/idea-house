@@ -1,0 +1,171 @@
+<header>
+  <div class="header-left">
+    <% if (req.isAuthenticated()) { var url="/users/" + req.user._id %>
+      <a href=<%=url%>><img class="logo" src="img/idea-house.png" alt="Logo" /></a>
+      <% } else { %>
+        <a href="/"><img class="logo" src="img/idea-house.png" alt="Logo" /></a>
+        <% } %>
+          <!-- <p class="header-title">Idea House</p> -->
+  </div>
+  <div class="header-center">
+    <a href="what_we_do">What we do?</a>
+    <a>How to use</a>
+  </div>
+  <!--Untuk belum masuk log
+      <div class="header-right">
+        <a href="login.html">Masuk log</a>
+        <a href="register.html">Daftar</a>
+      </div>
+      -->
+  <!--Untuk sudah masuk log-->
+  <div class="header-right">
+    <div class="timeline"><a href="">Timeline</a></div>
+    <a href="/upload"><span class="fa fa-plus-square-o"></span></a>
+    <span class="fa fa-bell-o"></span>
+    <span class="fa fa-comments-o"></span>
+    <div class="profile-dropdown">
+      <img id="profile-button" onclick="toggleProfileMenu()" src="img/profile8.png" />
+      <div id="profile-menu">
+        <div id="profile-menu-head">
+          <img id="profile-picture" src="img/profile8.png" />
+          <div>
+            <p id="profile-name">Jack Separo</p>
+            <p id="profile-email">jack.separo@gmail.com</p>
+          </div>
+        </div>
+        <div id="profile-menu-list">
+          <a class="profile-menu-item">Edit profil</a>
+          <a class="profile-menu-item">Ide</a>
+          <a class="profile-menu-item">Proyek</a>
+          <a class="profile-menu-item">Liked</a>
+          <a class="profile-menu-item">Fundraised</a>
+        </div>
+        <div id="profile-menu-logout">
+          <a class="profile-menu-item"><span>Log Out</span></a>
+        </div>
+      </div>
+    </div>
+    <!-- -->
+</header>
+
+<main id="contents">
+  <section class="post-main">
+    <h1 class="content-text">Enkapsulasi Simultan dari Probiotik dan Ekstraksi Kulit Buah Guarana untuk Pengembangan
+      Selai Kacang</h1>
+    <section id="post-data">
+      <section id="data-like">
+        <span class="fa fa-heart"></span>
+        <p class="data-text">1</p>
+      </section>
+      <section id="data-view">
+        <span class="fa fa-eye"></span>
+        <p class="data-text">25 tayangan</p>
+      </section>
+    </section>
+    <section>
+      <img id="post-img" src="img/idea_1.png"></img>
+      <p id="post-img-caption" class="content-text">Illustration of something</p>
+    </section>
+    <p id="post-description" class="content-text">
+      Terdapat banyak fitokimia dengan manfaat aktivitas fisiologis yang menguntungkan memiliki ketersediaan hayati
+      yang
+      terbatas karena sifat kelarutan dan stabilitasnya yang buruk. Bioaktivitas dari fitokimia dapat dipengaruhi
+      selama
+      proses pembebasan, pencernaan, penyerapan, distribusi, metabolisme, dan ekskresi setelah konsumsi oral. Dan
+      matriks
+      dalam pemrosesan makanan secara signifikan mempengaruhi kelarutan, degradasi kimia, dan penyerapannya di dalam
+      saluran
+      pencernaan.
+    </p>
+    <p id="post-description" class="content-text">
+      Bioavailabilitas atau ketersediaan hayati fitokimia dapat ditingkatkan dengan mengontrol komposisi dan struktur
+      matriks
+      makanan, serta mengoptimalkan operasi pengolahan makanan. Selain itu, pendekatan modifikasi kimia dan
+      enkapsulasi
+      dilaporkan mampu meningkatkan dispersibilitas, stabilitas, bioavailabilitas, dan bioaktivitas fitokimia. Khusus
+      untuk
+      berbagai teknologi enkapsulasi tersedia untuk tujuan ini, seperti nanopartikel biopolimer, emulsi, liposom,
+      nanopartikel
+      lipid padat, dan pembawa lipid struktur nano, yang dapat dirakit dari karbohidrat, protein, dan/atau lipid food
+      grade.
+      Selain itu, metode eksperimental yang biasa digunakan untuk mengevaluasi bioaksesibilitas dan bioavailabilitas
+      fitokimia
+      ditinjau. Pemanfaatan metode ini memungkinkan penyaringan formulasi makanan dengan struktur dan komposisi yang
+      berbeda,
+      sehingga memfasilitasi optimalisasi kinerjanya.
+    </p>
+    <p id="post-description" class="content-text">
+      Pengolahan kulit buah guarana untuk mengembalikan kandungan karotenoid yang dikombinasikan dengan probiotik
+      dapat
+      memperkuat matriks makanan sebagai bahan fungsional. Hal ini difokuskan pada enkapsulasi Bifidobacterium
+      animalis subsp.
+      lactis BLC-1 dan ekstrak kulit guaraná (GPE) untuk pengaplikasian dalam selai kacang. Serta, pengaruh bahan
+      bebas dan
+      enkapsulasi yang ditambahkan dalam selai kacang dievaluasi melalui penerimaan sensoris dan stabilitas produk
+      selama
+      penyimpanan.
+    </p>
+    <p id="post-description" class="content-text">
+      Co-enkapsulasi melindungi kandungan karotenoid yang terdapat pada kulit guarana dan secara signifikan
+      meningkatkan
+      viabilitas probiotik. Memasukkan mikrokapsul dalam selai kacang tidak akan mempengaruhi karakteristik dari
+      produk. Selai
+      kacang mengandung mikrokapsul yang sarat akan probiotik dan GPE yang mencapai viabilitas bifidobacterium
+      tertinggi,
+      sekitar 7,8 log CFU/g setelah 90 hari penyimpanan pada suhu 25 °C. Di sisi lain, selai kacang yang dilengkapi
+      dengan GPE
+      dan probiotik gratis menunjukkan penerimaan dan niat beli terendah secara keseluruhan, yang membenarkan
+      pentingnya
+      enkapsulasi untuk menutupi kegagalan GPE. Secara keseluruhan, enkapsulasi simultan memberikan pelestarian
+      karotenoid dan
+      viabilitas probiotik yang sangat baik, bahkan setelah aplikasinya dalam selai kacang, yang dapat mempertahankan
+      karakteristiknya.
+    </p>
+  </section>
+
+  <section class="post-sidebar">
+    <section>
+      <h2>Pembuat</h2>
+      <section id="author-profile">
+        <img id="author-picture" src="img/profile6.png"></img>
+        <section>
+          <p id="author-name">Jason Todd</p>
+          <p id="author-follower">100 pengikut</p>
+        </section>
+      </section>
+    </section>
+    <section>
+      <h2>Kategori</h2>
+      <section id="category-list">
+        <div class="category-item"></div>
+        <div class="category-item"></div>
+      </section>
+    </section>
+    <section>
+      <h2>You may also like</h2>
+      <section id="suggested-posts">
+        <section class="suggested-item">
+          <p class="suggested-title">Morbi efficitur aliquam tempor In mi mi, tincidunt in sapien</p>
+          <section class="suggested-author">
+            <img class="suggested-author-picture" src="img/placeholder.png"></img>
+            <p class="suggested-author-name">Amir Khan</p>
+          </section>
+        </section>
+        <section class="suggested-item">
+          <p class="suggested-title">Morbi efficitur aliquam tempor In mi mi, tincidunt in sapien</p>
+          <section class="suggested-author">
+            <img class="suggested-author-picture" src="img/placeholder.png"></img>
+            <p class="suggested-author-name">Amir Khan</p>
+          </section>
+        </section>
+        <section class="suggested-item">
+          <p class="suggested-title">Morbi efficitur aliquam tempor In mi mi, tincidunt in sapien</p>
+          <section class="suggested-author">
+            <img class="suggested-author-picture" src="img/placeholder.png"></img>
+            <p class="suggested-author-name">Amir Khan</p>
+          </section>
+        </section>
+      </section>
+    </section>
+  </section>
+</main>

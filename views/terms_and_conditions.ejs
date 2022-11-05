@@ -1,0 +1,32 @@
+<div class="terms-and-conditions">
+  <h1>Syarat dan Ketentuan</h1>
+
+  <div class="terms-and-conditions-text">
+    <ol>
+      <li>Tujuan kami adalah sebagai sarana penyaluran dan pengimplementasian ide. Idea House menyediakan tempat untuk
+        menyalurkan ide, membuat proyek dengan tim Anda atau dengan berkolaborasi antarpengguna, serta Anda dapat
+        mendiskusikan ide yang Anda miliki dengan pengguna lain.</li>
+      <li>Anda memiliki hak atas postingan yang Anda unggah.</li>
+      <li>Anda harus bertanggung jawab atas postingan yang Anda unggah. Hal ini berarti Anda memiliki kewenangan untuk
+        mengunggah postingan apa pun, tetapi dengan memastikan bahwa postingan Anda tidak melanggar hukum yang
+        berlaku.</li>
+      <li>Kami tidak memberikan bantuan apa pun pada postingan yang Anda unggah. Kami hanya akan membantu dalam proses
+        verifikasi dari pengajuan proyek yang telah Anda ajukan.</li>
+      <li>Anda harus bertanggung jawab atas pengajuan atau penyelenggaraan donasi yang diajukan.</li>
+    </ol>
+  </div>
+
+  <input type="checkbox" id="agree-checkbox" onclick="toggleClickableButton()" />
+  <label for="agree-checkbox">Saya menyetujui syarat dan ketentuan di atas</label>
+  <br />
+  <a href="/"><button id="agree-button" disabled>Saya Setuju</button></a>
+</div>
+<script>
+  function toggleClickableButton() {
+    if (document.getElementById("agree-checkbox").checked == true) {
+      document.getElementById("agree-button").disabled = false;
+    } else {
+      document.getElementById("agree-button").disabled = true;
+    }
+  }
+</script>

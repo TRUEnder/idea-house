@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <title>Obrolan - Idea House</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    #contents {
+      display: flex;
+      flex-flow: row;
+    }
+  </style>
+  <script>
+    function toggleProfileMenu() {
+      if (document.getElementById("profile-menu").style.display == "block") {
+        document.getElementById("profile-menu").style.display = "none";
+      } else {
+        document.getElementById("profile-menu").style.display = "block";
+      }
+    }
+
+    function switchChatTab(newSelect) {
+      if (document.getElementById("default-content").style.display != "none") {
+        document.getElementById("default-content").style.display = "none";
+        document.getElementsByClassName("chat-content")[0].style.display = "flex";
+      } else if (newSelect.className != "chat-tab selected") {
+        oldSelect = document.getElementsByClassName("chat-tab selected")[0]
+
+        oldSelect.className = "chat-tab";
+        oldTab = oldSelect.id.slice(0, -"-tab".length) + "-content";
+        document.getElementById(oldTab).style.display = "none";
+      }
+
+      if (newSelect.className != "chat-tab selected") {
+        newSelect.className = "chat-tab selected";
+        newTab = newSelect.id.slice(0, -"-tab".length) + "-content";
+        document.getElementById(newTab).style.display = "flex";
+      }
+    }
+  </script>
+</head>
+
+<body>
+  <header>
+    <div class="header-left">
+      <img class="logo" src="placeholder.png" alt="Logo"/>
+      <p class="header-title">Idea House</p>
+    </div>
+    <div class="header-center">
+      <a href="what_we_do.html" disabled>What we do?</a>
+      <a>How to use</a>
+    </div>    
+    <!--Untuk belum masuk log
+    <div class="header-right">
+      <a href="login.html">Masuk log</a>
+      <a href="register.html">Daftar</a>
+    </div>
+    --><!--Untuk sudah masuk log-->
+    <div class="header-right">
+      <img src="placeholder.png"/>
+      <img src="placeholder.png"/>
+      <img src="placeholder.png"/>
+      <a>Timeline</a>
+      <div class="profile-dropdown">
+        <img id="profile-button" onclick="toggleProfileMenu()" src="placeholder.png"/>
+        <div id="profile-menu">
+          <div id="profile-menu-head">
+            <img id="profile-picture" src="placeholder.png"/>
+            <div>
+              <p id="profile-name">Jack Separo</p>
+              <p id="profile-email">jack.separo@gmail.com</p>
+            </div>
+          </div>
+          <div id="profile-menu-list">
+            <a class="profile-menu-item">Edit profil</a>
+            <a class="profile-menu-item">Ide</a>
+            <a class="profile-menu-item">Proyek</a>
+            <a class="profile-menu-item">Liked</a>
+            <a class="profile-menu-item">Fundraised</a>
+          </div>
+          <div id="profile-menu-logout">
+            <a class="profile-menu-item">Keluar log</a>
+          </div>
+        </div>
+    </div>
+    <!-- -->
+  </header>
+
+  <main id="contents">
+    <section class="chat-list">
+      <h1>Obrolan</h1>
+      <input type="search" class="chat-search" name="search-query" placeholder="Cari Obrolan"></input>
+      <section class="chat-tabs">
+        <section class="chat-tab" id="group1-tab" onclick="switchChatTab(this)">
+          <img src="placeholder.png"></img>
+          <section class="chat-tab-text">
+            <section class="chat-tab-top">
+              <h2>Grup 1</h2> <!-- Harus sama h2 di chat-content -->
+              <p>•</p>
+              <p>1j</p>
+            </section>
+            <section class="chat-tab-bottom">
+              <p>Melanie: Okay</p>
+            </section>
+          </section>
+        </section>
+        <section class="chat-tab" id="private1-tab" onclick="switchChatTab(this)">
+          <img src="placeholder.png"></img>
+          <section class="chat-tab-text">
+            <section class="chat-tab-top">
+              <h2>Alexandra</h2> <!-- Harus sama h2 di chat-content -->
+              <p>•</p>
+              <p>1j</p>
+            </section>
+            <section class="chat-tab-bottom">
+              <p>I think about that too!!! oh my god haha</p>
+            </section>
+          </section>
+        </section>
+        <section class="chat-tab" id="private2-tab" onclick="switchChatTab(this)">
+          <img src="placeholder.png"></img>
+          <section class="chat-tab-text">
+            <section class="chat-tab-top">
+              <h2>Grup 002</h2> <!-- Harus sama h2 di chat-content -->
+              <p>•</p>
+              <p>3j</p>
+            </section>
+            <section class="chat-tab-bottom">
+              <p>Jazzy: oh yea yeaaa i got what you mean tia</p>
+            </section>
+          </section>
+        </section>
+        <section class="chat-tab" id="group2-tab" onclick="switchChatTab(this)">
+          <img src="placeholder.png"></img>
+          <section class="chat-tab-text">
+            <section class="chat-tab-top">
+              <h2>Samantha</h2> <!-- Harus sama h2 di chat-content -->
+              <p>•</p>
+              <p>2j</p>
+            </section>
+            <section class="chat-tab-bottom">
+              <p>Thats so true lol</p>
+            </section>
+          </section>
+        </section>
+        <section class="chat-tab" id="private3-tab" onclick="switchChatTab(this)">
+          <img src="placeholder.png"></img>
+          <section class="chat-tab-text">
+            <section class="chat-tab-top">
+              <h2>Mathew</h2> <!-- Harus sama h2 di chat-content -->
+              <p>•</p>
+              <p>5j</p>
+            </section>
+            <section class="chat-tab-bottom">
+              <p>Ok thanks</p>
+            </section>
+          </section>
+        </section>
+      </section>
+    </section>
+
+    <section id="default-content"> <!--Tidak disembunyikan secara default-->
+      <p class="default-text-top">Pilih Obrolan</p>
+      <p class="default-text-center">atau</p>
+      <p class="default-text-bottom">Mulai Obrolan Baru</p>
+    </section>
+    <section class="chat-content" style="display: none;">
+      <section id="group1-content" style="display: none;">
+        <section class="chat-head"> <!-- Harus sama img dan h2 di chat-tab -->
+          <img src="placeholder.png"></img>
+          <h2>Grup 1</h2>
+        </section>
+        <section class="chat-texts">
+          <p class="chat-message sent">Tes</p>
+          <p class="chat-message received">Tes</p>
+        </section>
+        <section class="chat-input">
+          <img src="placeholder.png"></img>
+          <img src="placeholder.png"></img>
+          <input type="text" placeholder="Pesan Baru..."></input>
+        </section>
+        </input>
+      </section>
+      <section id="private1-content" style="display: none;">
+        <section class="chat-head"> <!-- Harus sama img dan h2 di chat-tab -->
+          <img src="placeholder.png"></img>
+          <h2>Alexandra</h2>
+        </section>
+        <section class="chat-texts">
+          <p class="chat-message received">Hi!</pi>
+          <p class="chat-message received">I just saw your new post, n im interested w it. Would you mind to discuss it w me?</p>
+          <p class="chat-message sent">Oh hi! sure sureee</p>
+          <p class="chat-message received">before that, im alexandra nice to meet you!!!</p>
+          <p class="chat-message sent">haha nice to meet you tooo! im jack</p>
+          <p class="chat-message sent">so what are we gonna talkin abt?</p>
+          <p class="chat-message received">oh yea! first of all ive read your idea that you post recently n thats so goodd ngl</p>
+          <p class="chat-message received">like how can you think about tht? Im so curioussssss</p>
+          <p class="chat-message sent">idk but suddenly tht idea comes to my mind n i do some research for a minute n post itttt. What do you think?</p>
+          <p class="chat-message received">no but actually seriously</p>
+          <p class="chat-message received">not long a time ago, 2 or 3 days ago I thnk abt object tht you post like idk its so unpredictable n i saw your post n im like oh god...</p>
+          <p class="chat-message received">I think about that too!! oh my god haha</p>
+        </section>
+        <section class="chat-input">
+          <img src="placeholder.png"></img>
+          <img src="placeholder.png"></img>
+          <input type="text" placeholder="Pesan Baru..."></input>
+        </section>
+        </input>
+      </section>
+      <section id="private2-content" style="display: none;">
+        <section class="chat-head"> <!-- Harus sama img dan h2 di chat-tab -->
+          <img src="placeholder.png"></img>
+          <h2>Samantha</h2>
+        </section>
+        <section class="chat-texts">
+          <section class="chat-message">
+          </section>
+          <section class="chat-message">
+          </section>
+        </section>
+        <section class="chat-input">
+          <img src="placeholder.png"></img>
+          <img src="placeholder.png"></img>
+          <input type="text" placeholder="Pesan Baru..."></input>
+        </section>
+      </section>
+      <section id="group2-content" style="display: none;">
+        <section class="chat-head"> <!-- Harus sama img dan h2 di chat-tab -->
+          <img src="placeholder.png"></img>
+          <h2>Grup 002</h2>
+        </section>
+        <section class="chat-texts">
+          <section class="chat-message">
+          </section>
+          <section class="chat-message">
+          </section>
+        </section>
+        <section class="chat-input">
+          <img src="placeholder.png"></img>
+          <img src="placeholder.png"></img>
+          <input type="text" placeholder="Pesan Baru..."></input>
+        </section>
+      </section>
+      <section id="private3-content" style="display: none;">
+        <section class="chat-head"> <!-- Harus sama img dan h2 di chat-tab -->
+          <img src="placeholder.png"></img>
+          <h2>Mathew</h2>
+        </section>
+        <section class="chat-texts">
+          <section class="chat-message">
+          </section>
+          <section class="chat-message">
+          </section>
+        </section>
+        <section class="chat-input">
+          <img src="placeholder.png"></img>
+          <img src="placeholder.png"></img>
+          <input type="text" placeholder="Pesan Baru..."></input>
+        </section>
+      </section>
+    </section>
+  </main>
+</body>
+
+</html> 

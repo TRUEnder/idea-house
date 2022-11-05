@@ -1,0 +1,20 @@
+<div class="account-form">
+    <h1>Register</h1>
+    <form action="/register" method="post">
+        <% if (locals.errorMessage !=null) {%>
+            <%= errorMessage %>
+                <%} %>
+                    <input name="name" type="text" placeholder="Name" required>
+                    <input name="email" type="email" placeholder="Email" required>
+                    <%- include('partials/password') %>
+                        <a href="/login">
+                            <div>Login</div>
+                        </a>
+                        <a href="/">
+                            <div>Cancel</div>
+                        </a>
+                        <button type="submit" class="main-button">Daftar</button>
+                        <a href="/login"><button class="secondary">Log In</button></a>
+    </form>
+
+</div>

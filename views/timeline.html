@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <title>Timeline - Idea House</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    #contents {
+      display: flex;
+      flex-flow: row;
+    }
+  </style>
+  <script>
+    function toggleProfileMenu() {
+      if (document.getElementById("profile-menu").style.display == "block") {
+        document.getElementById("profile-menu").style.display = "none";
+      } else {
+        document.getElementById("profile-menu").style.display = "block";
+      }
+    }
+  </script>
+</head>
+
+<body>
+  <header>
+    <div class="header-left">
+      <img class="logo" src="placeholder.png" alt="Logo"/>
+      <p class="header-title">Idea House</p>
+    </div>
+    <div class="header-center">
+      <a href="what_we_do.html" disabled>What we do?</a>
+      <a>How to use</a>
+    </div>    
+    <!--Untuk belum masuk log
+    <div class="header-right">
+      <a href="login.html">Masuk log</a>
+      <a href="register.html">Daftar</a>
+    </div>
+    --><!--Untuk sudah masuk log-->
+    <div class="header-right">
+      <img src="placeholder.png"/>
+      <img src="placeholder.png"/>
+      <img src="placeholder.png"/>
+      <a>Timeline</a>
+      <div class="profile-dropdown">
+        <img id="profile-button" onclick="toggleProfileMenu()" src="placeholder.png"/>
+        <div id="profile-menu">
+          <div id="profile-menu-head">
+            <img id="profile-picture" src="placeholder.png"/>
+            <div>
+              <p id="profile-name">Jack Separo</p>
+              <p id="profile-email">jack.separo@gmail.com</p>
+            </div>
+          </div>
+          <div id="profile-menu-list">
+            <a class="profile-menu-item">Edit profil</a>
+            <a class="profile-menu-item">Ide</a>
+            <a class="profile-menu-item">Proyek</a>
+            <a class="profile-menu-item">Liked</a>
+            <a class="profile-menu-item">Fundraised</a>
+          </div>
+          <div id="profile-menu-logout">
+            <a class="profile-menu-item">Keluar log</a>
+          </div>
+        </div>
+    </div>
+    <!-- -->
+  </header>
+
+  <main id="contents">
+    <section class="timeline-posts">
+      <h1>Beranda</h1>
+      <section id="post-list">
+        <p>10 pos terbaru</p>
+        <section class="idea-item">
+          <section class="idea-item-left">
+            <h2 class="idea-name">Object Recognizer Mobile Apps for Blind People</h2>
+            <p class="idea-description">Integer dignissim dui ac mauris ultricies pretium. Aliquam blandit, lectus eget eleifend posuere, felis arcu iaculis massa, in consequat ante leo a purus.</p>
+            <section class="idea-data">
+              <section class="idea-author">
+                <img src="placeholder.png" alt="Foto profil pembuat pos"></img>
+                <p>Jason Todd</p>
+              </section>
+              <section class="idea-stats">
+                <section>
+                  <img src="placeholder.png" alt="Gambar hati"></img>
+                  <p>5</p>
+                </section>
+                <section>
+                  <img src="placeholder.png" alt="Gambar mata"></img>
+                  <p>25 tayangan</p>
+                </section>
+              </section>
+            </section>
+          </section>
+          <section class="idea-item-right">
+            <img class="idea-img"></img>
+          </section>
+        </section>
+        <section class="idea-item">
+          <section class="idea-item-left">
+            <h2 class="idea-name">What if We Bring Black Panther Soundproof Sneakers to Life</h2>
+            <p class="idea-description">Integer dignissim dui ac mauris ultricies pretium. Aliquam blandit, lectus eget eleifend posuere, felis arcu iaculis massa, in consequat ante leo a purus.</p>
+            <section class="idea-data">
+              <section class="idea-author">
+                <img src="placeholder.png" alt="Foto profil pembuat pos"></img>
+                <p>Jeremy N</p>
+              </section>
+              <section class="idea-stats">
+                <section>
+                  <img src="placeholder.png" alt="Gambar hati"></img>
+                  <p>1</p>
+                </section>
+                <section>
+                  <img src="placeholder.png" alt="Gambar mata"></img>
+                  <p>5 tayangan</p>
+                </section>
+              </section>
+            </section>
+          </section>
+          <section class="idea-item-right">
+            <img class="idea-img"></img>
+          </section>
+        </section>
+        <section class=idea-item>
+          <section class="idea-item-left">
+            <h2 class="idea-name">Water Filtering using Nanotechnology</h2>
+            <p class="idea-description">Integer dignissim dui ac mauris ultricies pretium. Aliquam blandit, lectus eget eleifend posuere, felis arcu iaculis massa, in consequat ante leo a purus. Aliquam blandit, lectus eget eleifend posuere, felis arcu iaculis massa, in consequat ante leo a purus.</p>
+            <section class="idea-data">
+              <section class="idea-author">
+                <img src="placeholder.png" alt="Foto profil pembuat pos"></img>
+                <p>Michelia</p>
+              </section>
+              <section class="idea-stats">
+                <section>
+                  <img src="placeholder.png" alt="Gambar hati"></img>
+                  <p>3</p>
+                </section>
+                <section>
+                  <img src="placeholder.png" alt="Gambar mata"></img>
+                  <p>15 tayangan</p>
+                </section>
+              </section>
+            </section>
+          </section>
+          <section class="idea-item-right">
+            <img class="idea-img"></img>
+          </section>
+        </section>
+      </section>
+    </section>
+
+    <section class="timeline-sidebar">
+      <section class="trending-posts">
+        <h2>Trending di Idea House</h2>
+        <section class="trending-item">
+          <p>Morbi efficitur aliquam tempor In mi mi, tincidunt in sapien</p>
+          <section class="trending-item-author">
+            <img></img>
+            <p>Amir Khan</p>
+          </section>
+        </section>
+        <section class="trending-item">
+          <p>Morbi efficitur aliquam tempor In mi mi, tincidunt in sapien</p>
+          <section class="trending-item-author">
+            <img></img>
+            <p>Amir Khan</p>
+          </section>
+        </section>
+        <a href="idea_catalog.html">Lebih banyak...</a>
+      </section>
+      <section class="more-topics">
+        <h2>Topik lainnya untukmu</h2>
+        <section class="topics-wrapper">
+          <p class="topic">Fashion</p>
+          <p class="topic">Olahraga</p>
+          <p class="topic">Lingkungan</p>
+          <p class="topic">Fisika</p>
+          <p class="topic">IT & Software</p>
+          <p class="topic">Rumah</p>
+          <p class="topic">Engineering</p>
+        </section>
+      </section>
+    </section>
+  </main>
+</body>
+
+</html> 

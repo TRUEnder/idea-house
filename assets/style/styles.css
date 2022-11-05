@@ -1,0 +1,728 @@
+/* Mayoritas halaman */
+body {
+    font-family: "Inter";
+    margin: 0px;
+    min-width: 1000px;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+header {
+    /*display: grid;
+    grid-template-columns: auto auto auto auto;*/
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    height: 40px;
+    border-bottom: 1px solid black;
+    padding: 28px 41px;
+}
+
+header .header-left {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+header .header-left .logo {
+    height: 47px;
+}
+
+header .header-left .header-title {
+    font-size: 40px;
+    font-weight: 600;
+}
+
+header .header-center {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    color: #858080;
+    font-size: 20px;
+    text-align: center;
+}
+
+header .header-right {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 30px;
+    font-size: 20px;
+    text-align: center;
+}
+
+.header-right img {
+    height: 40px;
+    width: 40px;
+}
+
+.profile-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+#profile-button {
+    height: 60px;
+    width: 60px;
+}
+
+#profile-menu {
+    display: none;
+    position: absolute;
+    left: -240px;
+    /* profile-menu.width - profile-button.width */
+    width: 300px;
+    background: #FFFFFF;
+    border: 1px solid #595959;
+    text-align: left;
+}
+
+#profile-menu-head {
+    height: 100px;
+    display: flex;
+    flex-direction: row;
+    width: inherit;
+}
+
+#profile-picture {
+    height: 65px;
+    width: 65px;
+    margin: 15px 20px 15px 30px;
+}
+
+#profile-menu-head>div {
+    margin: 20px 0px;
+}
+
+#profile-name {
+    margin: 0px;
+    font-family: Roboto;
+    font-size: 24px;
+    font-weight: 500;
+}
+
+#profile-email {
+    margin: 0px;
+    position: absolute;
+    font-family: Roboto;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+#profile-menu-list {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    height: 260px;
+    width: inherit;
+    border-top: 1px solid #858080;
+    border-bottom: 1px solid #858080;
+    padding: 10px;
+}
+
+.profile-menu-item {
+    font-size: 20px;
+    font-weight: 400;
+    margin: 6px;
+}
+
+#profile-menu-logout {
+    height: 30px;
+    width: inherit;
+    padding: 10px;
+}
+
+#profile-menu-logout a span {
+    color: #fd1818;
+}
+
+/* landing_page.html */
+
+#contents {
+    width: 100%;
+}
+
+.landing-page-top {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    height: 50px;
+}
+
+.landing-page-intro {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #FFC30B;
+    color: white;
+    height: 485px;
+    padding: 100px;
+}
+
+.landing-page-intro .intro {
+    width: 50%;
+}
+
+.intro-title {
+    font-size: 50px;
+    font-weight: 700;
+    margin-bottom: 40px;
+}
+
+#intro-option {
+    display: flex;
+    justify-content: space-between;
+    width: 400px;
+    margin-top: 60px;
+}
+
+#intro-option button {
+    width: 180px;
+    height: 70px;
+    font-size: 18px;
+    font-weight: 500;
+    border: 0;
+    border-radius: 10px;
+    color: white;
+}
+
+#post-button {
+    background-color: #494949;
+}
+
+#catalog-button {
+    background-color: #FF9900;
+}
+
+.landing-page-catalog {
+    margin: 50px;
+}
+
+.landing-page-catalog h1 {
+    font-size: 36px;
+    font-weight: 600;
+}
+
+.landing-page-catalog h2 {
+    font-size: 32px;
+    font-weight: 500;
+}
+
+.landing-page-catalog .idea-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    column-gap: 30px;
+    margin: 30px 10px;
+}
+
+.idea-list .idea-item {
+    width: 246px;
+    gap: 22px;
+}
+
+.idea-list .idea-item .idea-thumbnail {
+    height: 149px;
+    width: 246px;
+}
+
+.idea-list .idea-item p {
+    max-width: 246px;
+    text-align: center;
+}
+
+.landing-page-catalog .category-list {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    justify-content: space-around;
+    row-gap: 60px;
+    column-gap: 30px;
+    margin: 30px 10px;
+}
+
+.landing-page-catalog .category-list .category-thumbnail {
+    height: 275px;
+    width: 275px;
+}
+
+/* login.html dan register.html */
+.form-container {
+    height: 100vh;
+}
+
+.account-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 60px auto;
+    flex-direction: column;
+    gap: 30px;
+
+    width: 430px;
+    height: 500px;
+    background: #D9D9D9;
+    border-radius: 20px;
+}
+
+.account-form h1 {
+    font-family: "Poppins";
+    font-size: 40px;
+    font-weight: 600;
+}
+
+.account-form form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    font-family: "Nunito";
+}
+
+.account-form form input {
+    height: 40px;
+    width: 330px;
+    margin: 5px;
+    background: #F3F6F8;
+    border: 1px solid #F3F6F8;
+    border-radius: 12px;
+    padding-left: 40px;
+
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.account-form form input {
+    color: #767676;
+}
+
+.account-form .button {
+    height: 50px;
+    width: 330px;
+    margin: 20px;
+    border: 1px solid #404040;
+    border-radius: 12px;
+
+    font-family: "Nunito";
+    font-size: 20px;
+    font-weight: 700;
+    color: #FFFFFF;
+}
+
+.account-form form>p a {
+    color: #BAB3B3;
+}
+
+.account-form .main-button {
+    height: 50px;
+    width: 330px;
+    margin: 20px 20px 5px 20px;
+    background: #404040;
+    border: 1px solid #404040;
+    border-radius: 12px;
+
+    font-family: "Nunito";
+    font-size: 20px;
+    font-weight: 700;
+    color: #FFFFFF;
+}
+
+.account-form .secondary {
+    height: 50px;
+    width: 330px;
+    margin: 5px 20px 20px 20px;
+    background: #888888;
+    border: 1px solid #E3E3E3;
+    border-radius: 12px;
+
+    font-family: "Nunito";
+    font-size: 20px;
+    font-weight: 700;
+    color: #FFFFFF;
+}
+
+/* terms_and_conditions.html */
+.terms-and-conditions {
+    height: auto;
+    width: 600px;
+    background: #FFFFFF;
+    margin: 27px;
+    padding: 40px;
+}
+
+.terms-and-conditions h1 {
+    font-size: 32px;
+    font-weight: 500;
+}
+
+.terms-and-conditions-text {
+    overflow-y: scroll;
+    height: 280px;
+    border-bottom: 1px solid #AAAAAA;
+    margin: 40px 0px 20px 0px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 25px;
+}
+
+.terms-and-conditions #agree-checkbox {
+    font-size: 16px;
+    font-weight: 400;
+    margin: 10px;
+}
+
+.terms-and-conditions #agree-button {
+    float: right;
+    padding: 7px;
+    background: #FFC30B;
+
+    font-size: 16px;
+    font-weight: 500;
+    color: #FFFFFF;
+}
+
+/* what_we_do.html */
+.what-we-do-intro {
+    padding: 90px;
+    background-color: #888888;
+    background-image: url(../img/whatwedo.png);
+    height: 519px;
+
+    font-family: "Roboto";
+    color: #FFFFFF;
+    text-align: right;
+}
+
+.what-we-do-intro :first-child {
+    float: right;
+}
+
+.what-we-do-intro h1 {
+    font-size: 48px;
+    font-weight: 500;
+}
+
+.what-we-do-intro p {
+    font-size: 24px;
+    font-weight: 400;
+}
+
+.what-we-do-main {
+    padding: 170px;
+    font-family: "Roboto";
+}
+
+.what-we-do-main>h1 {
+    font-size: 36px;
+    font-weight: 600;
+}
+
+.what-we-do-main>div {
+    display: flex;
+    flex-direction: row;
+    column-gap: 100px;
+}
+
+.what-we-do-main #left {
+    flex: 1 1 50%;
+}
+
+.about-text {
+    margin-top: 50px;
+    font-size: 24px;
+    font-weight: 400;
+    color: #515151;
+}
+
+.option-button {
+    margin-top: 80px;
+}
+
+.what-we-do-main #left button {
+    height: 67px;
+    width: 340px;
+    margin: 10px 0px 10px 0px;
+    border: 1px solid #FFC30B;
+    border-radius: 10px;
+    padding: 10px 50px 10px 50px;
+
+    font-size: 24px;
+    font-weight: 500;
+}
+
+#new-idea-button {
+    background-color: #FFC30B;
+}
+
+.what-we-do-main #right {
+    flex: 1 1 50%;
+
+    display: flex;
+    flex-direction: column;
+    row-gap: 70px;
+}
+
+.what-we-do-main #right .what-we-do-point {
+    display: flex;
+    flex-direction: row;
+    column-gap: 52px;
+}
+
+.what-we-do-main #right img {
+    height: 100px;
+    width: 100px;
+}
+
+.what-we-do-main #right h2 {
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.what-we-do-main #right p {
+    font-size: 20px;
+    font-weight: 400;
+}
+
+/* upload_idea.html */
+.idea-main {
+    display: block;
+    margin: 50px 100px;
+    font-family: "Roboto";
+}
+
+.idea-main #input-title {
+    width: 100%;
+    border-style: none;
+
+    font-size: 64px;
+    font-weight: 500;
+    line-height: 128px;
+}
+
+.idea-main #input-description {
+    height: 500px;
+    width: 100%;
+    border-style: none;
+
+    font-family: "Roboto";
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 28px;
+}
+
+.idea-main ::placeholder {
+    color: #DCDCDC;
+}
+
+.idea-sidebar {
+    border-left: 1px solid #D0D0D0;
+    padding: 30px 60px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.idea-sidebar h2 {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.idea-sidebar .category-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.idea-sidebar .category-item {
+    display: flex;
+    flex-direction: row;
+    gap: 25px;
+}
+
+.idea-sidebar .category-item-img {
+    height: 30px;
+    width: 30px;
+}
+
+.idea-sidebar .category-item-text {
+    height: 30px;
+    width: 158px;
+    border: 1px solid #DDD9D9
+}
+
+.idea-sidebar a {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.idea-sidebar button {
+    height: 40px;
+    width: 200px;
+    align-self: center;
+    background: #8E8E8E;
+    border-radius: 10px;
+    padding: 10px 50px 10px 50px;
+
+    font-size: 16px;
+    font-weight: 700;
+    color: #FFFFFF;
+    align-items: center;
+    text-align: center;
+}
+
+/* upload_idea.html */
+.post-main {
+    display: block;
+    margin: 50px 100px;
+}
+
+.post-main .content-text {
+    font-family: "Roboto";
+    font-size: 40px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.post-main .data-text {
+    font-family: "Inter";
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 25px;
+    margin-bottom: 20px;
+}
+
+.post-main h1 {
+    font-size: 64px;
+    font-weight: 500;
+    line-height: 75px;
+}
+
+.post-main #post-data {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+}
+
+.post-main #post-data>section {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 8px;
+}
+
+.post-main #post-data img {
+    height: 30px;
+    width: 30px;
+}
+
+.post-main #post-img {
+    height: 435px;
+    width: 100%;
+}
+
+.post-main #post-img-caption {
+    color: #CCCCCC;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 23px;
+}
+
+.post-main #post-description {
+    color: #1F1F1F;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 38px;
+}
+
+.post-sidebar {
+    border-left: 1px solid #D0D0D0;
+    padding: 30px 60px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.post-sidebar section h2 {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 29px;
+}
+
+.post-sidebar #author-profile {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+
+    font-size: 16px;
+    line-height: 20px;
+}
+
+.post-sidebar #author-picture {
+    height: 60px;
+    width: 60px;
+}
+
+.post-sidebar #author-profile>section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.post-sidebar #author-name {
+    font-weight: 700;
+    margin: 0px;
+}
+
+.post-sidebar #author-follower {
+    font-weight: 400;
+    margin: 0px;
+}
+
+.post-sidebar #category-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.post-sidebar .category-item {
+    background: #D9D9D9;
+    height: 30px;
+    width: 120px;
+}
+
+.post-sidebar .suggested-title {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 20px;
+}
+
+.post-sidebar .suggested-author {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.post-sidebar .suggested-author-picture {
+    height: 16px;
+    width: 16px;
+}
+
+.post-sidebar .suggested-author-name {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 14px;
+}

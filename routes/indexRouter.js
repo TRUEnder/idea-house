@@ -13,34 +13,11 @@ const UserSchema = require('../models/userSchema')
 const IdeaSchema = require('../models/ideaSchema')
 const ProjectSchema = require('../models/projectSchema')
 
-// Local Passport authentication set up
-const passport = require('passport')
 const initializePassport = require('../config/passport-config')
-initializePassport(passport,
-    email => { return UserSchema.findOne({ email: email }) },
-    (id) => {
-        const user = UserSchema.findOne({ _id: id })
-        return user
-    }
+const passport = initializePassport(
+    async (email) => { return await UserSchema.findOne({ email: email }) },
+    async (id) => { return await UserSchema.findOne({ _id: id }) }
 )
-
-// Session Management
-const session = require('express-session')
-const flash = require('express-flash')
-router.use(flash())
-router.use(session({
-    secret: 'secret',
-    resave: false,
-    saveUninitialized: false
-}))
-router.use(passport.session())
-router.use(passport.initialize())
-
-// Child Router
-
-const usersRouter = require('./users')
-router.use('/users', usersRouter)
-
 
 // Blocking direct access to page for authenticated user only
 const blockForAuthenticated = require('../config/blockForAuthenticated')
@@ -68,7 +45,7 @@ router.post('/register', async (req, res) => {
 
     try {
         await user.save()
-        res.redirect('/login')
+        res.redirect('/register/terms_and_conditions')
     } catch {
         res.render('register.ejs',
             { title: 'Register', errorMessage: 'Something went wrong. Please try again.' })
@@ -80,7 +57,7 @@ router.post('/login', passport.authenticate('local', {
     failureFlash: true
 }),
     (req, res) => {
-        res.redirect(`/users/${req.user._id}`)
+        res.redirect(`/users/${req.user.id}`)
     }
 )
 
@@ -95,18 +72,34 @@ router.get('/what_we_do', (req, res) => {
     res.render('what_we_do.ejs', { title: 'What We Do', req: req });
 })
 
-router.get('/terms_and_conditions', (req, res) => {
+router.get('/register/terms_and_conditions', blockForAuthenticated, (req, res) => {
     res.render('terms_and_conditions.ejs', { title: 'Terms and Conditions' });
 })
 
-router.get('/post', (req, res) => {
-    res.render('postingan.ejs', { title: 'Postingan', req: req });
-})
+router.get('/idea_catalog', async (req, res) => {
+    const ideas = await IdeaSchema.find()
+    const ideasData = []
+    for (let i = 0; i < ideas.length; i++) {
+        const author = await UserSchema.findOne({ _id: ideas[i].author })
+        const ideaData = {
+            id: ideas[i]._id,
+            title: ideas[i].title,
+            authorName: author.name,
+            created: ideas[i].created,
+            modified: ideas[i].modified,
+            label: ideas[i].label,
+            categories: ideas[i].categories,
+            content: ideas[i].content,
+            thumbnail: ideas[i].thumbnail,
+            thumbnail_desc: ideas[i].thumbnail_desc,
+            like: ideas[i].like,
+            views: ideas[i].views,
+        }
+        ideasData.push(ideaData)
+    }
 
-router.get('/upload', (req, res) => {
-    res.render('upload_idea.ejs', { title: 'Upload Idea', req: req });
+    res.render('idea_catalog.ejs', { title: 'Idea Catalog', req, ideasData })
 })
-
 
 // TESTING PURPOSE
 
@@ -139,7 +132,7 @@ router.get('/allproject', async (req, res) => {
 
 router.use((req, res) => {
     res.statusCode = 404
-    res.render('notFound.ejs', { title: '404 - Page not found' })
+    res.render('notFound.ejs', { title: '404 - Page not found', req: req })
 })
 
 

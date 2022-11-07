@@ -4,17 +4,12 @@
         <% if (locals.errorMessage !=null) {%>
             <%= errorMessage %>
                 <%} %>
-                    <input name="name" type="text" placeholder="Name" required>
+                    <input name="name" type="text" placeholder="Nama" required>
                     <input name="email" type="email" placeholder="Email" required>
                     <%- include('partials/password') %>
-                        <a href="/login">
-                            <div>Login</div>
-                        </a>
-                        <a href="/">
-                            <div>Cancel</div>
-                        </a>
-                        <button type="submit" class="main-button">Daftar</button>
-                        <a href="/login"><button class="secondary">Log In</button></a>
+                        <input type="password" placeholder="Konfirmasi Kata Sandi"></input>
+                        <button type="submit" class="main-button">Register</button>
+                        <a class="secondary" href="/login">Log In</a>
     </form>
 
 </div>

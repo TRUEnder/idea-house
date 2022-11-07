@@ -1,0 +1,161 @@
+<header>
+  <div class="header-left">
+    <% const url="/users/" + user.id %>
+      <a href=<%=url %>><img class="logo" src="/img/idea-house.png" alt="Logo" /></a>
+  </div>
+  <div class="header-center">
+    <a href="/what_we_do">What we do?</a>
+    <a>How to use</a>
+  </div>
+  <div class="header-right">
+
+    <% const timelineUrl=url + "/timeline" ; const uploadUrl=url + "/upload" ; const notifUrl=url + "/notification" ;
+      const chatUrl=url + "/chat" ; const profileUrl=url + "/profile" %>
+
+      <div class="timeline"><a href=<%=timelineUrl%>>Timeline</a></div>
+      <a href=<%=uploadUrl %>><span class="fa fa-plus-square-o"></span></a>
+      <a href=<%=notifUrl %>><span class="fa fa-bell-o"></span></a>
+      <a href=<%=chatUrl %>><i class="bi bi-chat-left-text"></i></a>
+      <div class="profile-dropdown">
+        <img id="profile-button" onclick="toggleProfileMenu()" src="/img/profile8.png" />
+        <div id="profile-menu">
+          <a href=<%=profileUrl %>>
+            <div id="profile-menu-head">
+              <img id="profile-picture" src="/img/profile8.png" />
+              <div>
+                <p id="profile-name">
+                  <%= user.name %>
+                </p>
+                <p id="profile-email">
+                  <%= user.email %>
+                </p>
+              </div>
+            </div>
+          </a>
+          <div id="profile-menu-list">
+            <a href=<%=profileUrl%> class="profile-menu-item">Edit profil</a>
+            <a href=<%=profileUrl%> class="profile-menu-item">Ide</a>
+            <a href=<%=profileUrl%> class="profile-menu-item">Proyek</a>
+            <a href=<%=profileUrl%> class="profile-menu-item">Liked</a>
+          </div>
+          <div id="profile-menu-logout">
+            <form action="/logout?_method=DELETE" method="POST">
+              <button type="submit" class="btn btn-link" style="color: red; text-decoration: none;">Log
+                Out</button>
+            </form>
+          </div>
+        </div>
+      </div>
+  </div>
+</header>
+
+<main id="contents" style="display: flex; flex-flow: row;">
+  <section class="timeline-posts">
+    <h1>Beranda</h1>
+    <section id="post-list">
+      <p>10 pos terbaru</p>
+      <section class="idea-item">
+        <section class="idea-item-left">
+          <h2 class="idea-name">Object Recognizer Mobile Apps for Blind People</h2>
+          <p class="idea-description">Integer dignissim dui ac mauris ultricies pretium. Aliquam blandit, lectus eget
+            eleifend posuere, felis arcu iaculis massa, in consequat ante leo a purus.</p>
+          <section class="idea-data">
+            <img class="idea-author" src="/img/profile1.png" alt="Foto profil pembuat pos"></img>
+            <p class="idea-author">Jason Todd</p>
+            <i class="bi bi-heart"></i>
+            <p class=" idea-stats">5</p>
+            <i class="bi bi-eye"></i>
+            <p class="idea-stats">25 tayangan</p>
+          </section>
+        </section>
+        <section class="idea-item-right">
+          <img class="idea-img"></img>
+        </section>
+      </section>
+      <section class="idea-item">
+        <section class="idea-item-left">
+          <h2 class="idea-name">What if We Bring Black Panther Soundproof Sneakers to Life</h2>
+          <p class="idea-description">Integer dignissim dui ac mauris ultricies pretium. Aliquam blandit, lectus eget
+            eleifend posuere, felis arcu iaculis massa, in consequat ante leo a purus.</p>
+          <section class="idea-data">
+            <img class="idea-author" src="/img/profile2.png" alt="Foto profil pembuat pos"></img>
+            <p class="idea-author">Jeremy N</p>
+            <i class="bi bi-heart"></i>
+            <p class=" idea-stats">1</p>
+            <i class="bi bi-eye"></i>
+            <p class="idea-stats">5 tayangan</p>
+          </section>
+        </section>
+        <section class="idea-item-right">
+          <img class="idea-img"></img>
+        </section>
+      </section>
+      <section class=idea-item>
+        <section class="idea-item-left">
+          <h2 class="idea-name">Water Filtering using Nanotechnology</h2>
+          <p class="idea-description">Integer dignissim dui ac mauris ultricies pretium. Aliquam blandit, lectus eget
+            eleifend posuere, felis arcu iaculis massa, in consequat ante leo a purus. Aliquam blandit, lectus eget
+            eleifend posuere, felis arcu iaculis massa, in consequat ante leo a purus.</p>
+          <section class="idea-data">
+            <img class="idea-author" src="/img/profile3.png" alt="Foto profil pembuat pos"></img>
+            <p class="idea-author">Michelia</p>
+            <i class="bi bi-heart"></i>
+            <p class=" idea-stats">3</p>
+            <i class="bi bi-eye"></i>
+            <p class="idea-stats">15 tayangan</p>
+          </section>
+        </section>
+        <section class="idea-item-right">
+          <img class="idea-img"></img>
+        </section>
+      </section>
+    </section>
+  </section>
+
+  <section class="timeline-sidebar">
+    <section class="trending-posts">
+      <h2>Trending di Idea House</h2>
+      <section class="trending-item">
+        <p>Morbi efficitur aliquam tempor In mi mi, tincidunt in sapien</p>
+        <section class="trending-item-author">
+          <img></img>
+          <p>Amir Khan</p>
+        </section>
+      </section>
+      <section class="trending-item">
+        <p>Morbi efficitur aliquam tempor In mi mi, tincidunt in sapien</p>
+        <section class="trending-item-author">
+          <img></img>
+          <p>Amir Khan</p>
+        </section>
+      </section>
+      <a href="/idea_catalog">Lebih banyak...</a>
+    </section>
+    <section class="more-topics">
+      <h2>Topik lainnya untukmu</h2>
+      <section class="topics-wrapper">
+        <a href="/idea_catalog">
+          <p class="topic">Fashion</p>
+        </a>
+        <a href="/idea_catalog">
+          <p class="topic">Olahraga</p>
+        </a>
+        <a href="/idea_catalog">
+          <p class="topic">Lingkungan</p>
+        </a>
+        <a href="/idea_catalog">
+          <p class="topic">Fisika</p>
+        </a>
+        <a href="/idea_catalog">
+          <p class="topic">IT & Software</p>
+        </a>
+        <a href="/idea_catalog">
+          <p class="topic">Rumah</p>
+        </a>
+        <a href="/idea_catalog">
+          <p class="topic">Engineering</p>
+        </a>
+      </section>
+    </section>
+  </section>
+</main>

@@ -19,9 +19,10 @@ const ideaSchema = new mongoose.Schema({
     },
     label: {
         type: String,
-        require: true
+        require: true,
+        default: 'Idea'
     },
-    category: {
+    categories: {
         type: [String],
         require: true
     },
@@ -37,11 +38,13 @@ const ideaSchema = new mongoose.Schema({
     },
     like: {
         type: Number,
-        require: true
+        require: true,
+        default: 0
     },
     views: {
         type: Number,
-        require: true
+        require: true,
+        default: 0
     }
 })
 

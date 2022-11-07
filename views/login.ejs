@@ -1,7 +1,6 @@
 <div class="form-container">
     <div class="account-form">
         <h1>Login</h1>
-
         <% if (messages.error) { %>
             <%= messages.error %>
                 <% } %>
@@ -9,9 +8,9 @@
                     <form action="/login" method="POST">
                         <input type="text" placeholder="Masukkan Email" name="email"></input>
                         <%- include('partials/password') %>
-                            <p>Lupa password? Klik di <a href="#">sini</a></p>
-                            <button class="main-button" type="submit">Masuk</button>
-                            <a href="/register"><button class="secondary">Daftar</button></a>
+                            <br><br>
+                            <button class="main-button" type="submit">Log In</button>
+                            <a class="secondary" href="/register">Register</a>
                     </form>
     </div>
 </div>

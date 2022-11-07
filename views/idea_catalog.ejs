@@ -1,0 +1,207 @@
+<% if (!req.isAuthenticated()) { %>
+  <header>
+    <div class="header-left">
+      <a href="/"><img class="logo" src="img/idea-house.png" alt="Logo" /></a>
+    </div>
+
+    <div class="header-center">
+      <a href="/what_we_do">What we do?</a>
+      <a>How to use</a>
+    </div>
+
+    <div class="header-right">
+      <a href="/login">
+        <div>Login</div>
+      </a>
+      <a href="/register">
+        <div>Register</div>
+      </a>
+      <!-- -->
+  </header>
+
+  <% } else { %>
+
+    <header>
+      <div class="header-left">
+        <% const url="/users/" + req.user.id %>
+          <a href=<%=url %>><img class="logo" src="/img/idea-house.png" alt="Logo" /></a>
+      </div>
+      <div class="header-center">
+        <a href="/what_we_do">What we do?</a>
+        <a>How to use</a>
+      </div>
+      <div class="header-right">
+
+        <% const timelineUrl=url + "/timeline" ; const uploadUrl=url + "/upload" ; const notifUrl=url + "/notification"
+          ; const chatUrl=url + "/chat" ; const profileUrl=url + "/profile" %>
+
+          <div class="timeline"><a href=<%=timelineUrl%>>Timeline</a></div>
+          <a href=<%=uploadUrl %>><span class="fa fa-plus-square-o"></span></a>
+          <a href=<%=notifUrl %>><span class="fa fa-bell-o"></span></a>
+          <a href=<%=chatUrl %>><i class="bi bi-chat-left-text"></i></a>
+          <div class="profile-dropdown">
+            <img id="profile-button" onclick="toggleProfileMenu()" src="/img/profile8.png" />
+            <div id="profile-menu">
+              <a href=<%=profileUrl %>>
+                <div id="profile-menu-head">
+                  <img id="profile-picture" src="/img/profile8.png" />
+                  <div>
+                    <p id="profile-name">
+                      <%= req.user.name %>
+                    </p>
+                    <p id="profile-email">
+                      <%= req.user.email %>
+                    </p>
+                  </div>
+                </div>
+              </a>
+              <div id="profile-menu-list">
+                <a href=<%=profileUrl%> class="profile-menu-item">Edit profil</a>
+                <a href=<%=profileUrl%> class="profile-menu-item">Ide</a>
+                <a href=<%=profileUrl%> class="profile-menu-item">Proyek</a>
+                <a href=<%=profileUrl%> class="profile-menu-item">Liked</a>
+              </div>
+              <div id="profile-menu-logout">
+                <form action="/logout?_method=DELETE" method="POST">
+                  <button type="submit" class="btn btn-link" style="color: red; text-decoration: none;">Log
+                    Out</button>
+                </form>
+              </div>
+            </div>
+          </div>
+      </div>
+    </header>
+    <% } %>
+
+      <main id="contents" class="d-flex flex-flow-row">
+        <section class="catalog-category">
+          <h2>Kategori</h2>
+          <section class="category-tabs">
+            <p class="category-tab selected" id="ideas-tab" onclick="switchCategoryTab(this)">Ide Populer</p>
+            <p class="category-tab" id="projects-tab" onclick="switchCategoryTab(this)">Project Populer</p>
+            <p class="category-tab" id="home-and-kitchen-tab" onclick="switchCategoryTab(this)">Rumah & Dapur</p>
+            <p class="category-tab" id="it-and-software-tab" onclick="switchCategoryTab(this)">IT & Software</p>
+            <p class="category-tab" id="engineering-tab" onclick="switchCategoryTab(this)">Engineering</p>
+            <p class="category-tab" id="sports-tab" onclick="switchCategoryTab(this)">Olahraga</p>
+          </section>
+        </section>
+
+        <section class="catalog-idea">
+          <h1>Katalog Ide</h1>
+          <section id="ideas-content">
+
+            <% ideasData.forEach((idea)=> { %>
+              <% const postUrl=`/post/${idea.id}` %>
+                <a href=<%=postUrl %>>
+                  <section class="idea-item">
+                    <section class="idea-item-left">
+                      <h2 class="idea-name">
+                        <%= idea.title %>
+                      </h2>
+                      <p class="idea-description">
+                        <%= idea.content.slice(0, 140).concat(' ...') %>
+                      </p>
+                      <section class="idea-data">
+                        <img class="idea-author" src="img/profile8.png" alt="Foto profil pembuat pos"></img>
+                        <p class="idea-author">
+                          <%= idea.authorName %>
+                        </p>
+                        <span class="fa fa-heart-o"></span>
+                        <p class="idea-stats">
+                          <%= idea.like %>
+                        </p>
+                        <span class="fa fa-eye"></span>
+                        <p class="idea-stats">
+                          <%= idea.views %> tayangan
+                        </p>
+                      </section>
+                    </section>
+                    <section class="idea-item-right">
+                      <% if (idea.thumbnail==null) { %>
+                        <img class="idea-img" id="post-img" src="/img/placeholder.png"></img>
+                        <% } else { %>
+                          <img class="idea-img" id="post-img" src="/img/idea_1.png"></img>
+                          <% } %>
+                    </section>
+                  </section>
+                </a>
+                <% }) %>
+
+          </section>
+
+          <section id="projects-content" style="display: none;">
+            <!-- FOR LOOP -->
+            <section class="idea-item">
+              <section class="idea-item-left">
+                <h2 class="idea-name">Creates Smart Grid Applications in Several Areas in Sukabumi</h2>
+                <p class="idea-description">Integer dignissim dui ac mauris ultricies pretium. Aliquam blandit, lectus
+                  eget
+                  eleifend posuere, felis arcu iaculis massa, in consequat ante leo a purus.</p>
+                <section class="idea-data">
+                  <img class="idea-author" src="img/placeholder.png" alt="Foto profil pembuat pos"></img>
+                  <p class="idea-author">Jackson</p>
+                  <img class="idea-stats" src="img/placeholder.png" alt="Gambar hati"></img>
+                  <p class="idea-stats">895</p>
+                  <img class="idea-stats" src="img/placeholder.png" alt="Gambar mata"></img>
+                  <p class="idea-stats">6,3rb tayangan</p>
+                </section>
+              </section>
+              <section class="idea-item-right">
+                <img class="idea-img"></img>
+              </section>
+            </section>
+
+            <section class="idea-item">
+              <section class="idea-item-left">
+                <h2 class="idea-name">Application of Polyampholytes in Emerging Technologies</h2>
+                <p class="idea-description">Integer dignissim dui ac mauris ultricies pretium. Aliquam blandit, lectus
+                  eget
+                  eleifend posuere, felis arcu iaculis massa, in consequat ante leo a purus.</p>
+                <section class="idea-data">
+                  <img class="idea-author" src="img/placeholder.png" alt="Foto profil pembuat pos"></img>
+                  <p class="idea-author">Jayden B.</p>
+                  <img class="idea-stats" src="img/placeholder.png" alt="Gambar hati"></img>
+                  <p class="idea-stats">535</p>
+                  <img class="idea-stats" src="img/placeholder.png" alt="Gambar mata"></img>
+                  <p class="idea-stats">3,2rb tayangan</p>
+                </section>
+              </section>
+              <section class="idea-item-right">
+                <img class="idea-img"></img>
+              </section>
+            </section>
+
+            <section class=idea-item>
+              <section class="idea-item-left">
+                <h2 class="idea-name">Exploring Consumers Subjective Shopping Experiences in Directly Operated Luxury
+                  Brand
+                  Stores</h2>
+                <p class="idea-description">Integer dignissim dui ac mauris ultricies pretium. Aliquam blandit, lectus
+                  eget
+                  eleifend posuere, felis arcu iaculis massa, in consequat ante leo a purus.</p>
+                <section class="idea-data">
+                  <img class="idea-author" src="img/placeholder.png" alt="Foto profil pembuat pos"></img>
+                  <p class="idea-author">Caroline</p>
+                  <img class="idea-stats" src="img/placeholder.png" alt="Gambar hati"></img>
+                  <p class="idea-stats">300</p>
+                  <img class="idea-stats" src="img/placeholder.png" alt="Gambar mata"></img>
+                  <p class="idea-stats">2,1rb tayangan</p>
+                </section>
+              </section>
+              <section class="idea-item-right">
+                <img class="idea-img"></img>
+              </section>
+            </section>
+            <!-- END FOR LOOP -->
+
+          </section>
+          <section id="home-and-kitchen-content" style="display: none;">
+          </section>
+          <section id="it-and-software-content" style="display: none;">
+          </section>
+          <section id="engineering-content" style="display: none;">
+          </section>
+          <section id="sports-content" style="display: none;">
+          </section>
+        </section>
+      </main>

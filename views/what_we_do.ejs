@@ -1,100 +1,127 @@
-<header>
-  <div class="header-left">
-    <% if (req.isAuthenticated()) { var url="/users/" + req.user._id %>
-      <a href=<%=url%>><img class="logo" src="img/idea-house.png" alt="Logo" /></a>
-      <% } else { %>
-        <a href="/"><img class="logo" src="img/idea-house.png" alt="Logo" /></a>
-        <% } %>
-          <!-- <p class="header-title">Idea House</p> -->
-  </div>
-  <div class="header-center">
-    <a href="what_we_do">What we do?</a>
-    <a>How to use</a>
-  </div>
-  <!--Untuk belum masuk log
+<% if (!req.isAuthenticated()) { %>
+  <header>
+    <div class="header-left">
+      <a href="/"><img class="logo" src="img/idea-house.png" alt="Logo" /></a>
+    </div>
+
+    <div class="header-center">
+      <a href="/what_we_do">What we do?</a>
+      <a>How to use</a>
+    </div>
+
+    <div class="header-right">
+      <a href="/login">
+        <div>Login</div>
+      </a>
+      <a href="/register">
+        <div>Register</div>
+      </a>
+  </header>
+
+  <% } else { %>
+
+    <header>
+      <div class="header-left">
+        <% const url="/users/" + req.user.id %>
+          <a href=<%=url %>><img class="logo" src="/img/idea-house.png" alt="Logo" /></a>
+      </div>
+      <div class="header-center">
+        <a href="/what_we_do">What we do?</a>
+        <a>How to use</a>
+      </div>
       <div class="header-right">
-        <a href="login.html">Masuk log</a>
-        <a href="register.html">Daftar</a>
+
+        <% const timelineUrl=url + "/timeline" ; const uploadUrl=url + "/upload" ; const notifUrl=url + "/notification"
+          ; const chatUrl=url + "/chat" ; const profileUrl=url + "/profile" %>
+
+          <div class="timeline"><a href=<%=timelineUrl%>>Timeline</a></div>
+          <a href=<%=uploadUrl %>><span class="fa fa-plus-square-o"></span></a>
+          <a href=<%=notifUrl %>><span class="fa fa-bell-o"></span></a>
+          <a href=<%=chatUrl %>><i class="bi bi-chat-left-text"></i></a>
+          <div class="profile-dropdown">
+            <img id="profile-button" onclick="toggleProfileMenu()" src="/img/profile8.png" />
+            <div id="profile-menu">
+              <a href=<%=profileUrl %>>
+                <div id="profile-menu-head">
+                  <img id="profile-picture" src="/img/profile8.png" />
+                  <div>
+                    <p id="profile-name">
+                      <%= req.user.name %>
+                    </p>
+                    <p id="profile-email">
+                      <%= req.user.email %>
+                    </p>
+                  </div>
+                </div>
+              </a>
+              <div id="profile-menu-list">
+                <a href=<%=profileUrl%> class="profile-menu-item">Edit profil</a>
+                <a href=<%=profileUrl%> class="profile-menu-item">Ide</a>
+                <a href=<%=profileUrl%> class="profile-menu-item">Proyek</a>
+                <a href=<%=profileUrl%> class="profile-menu-item">Liked</a>
+              </div>
+              <div id="profile-menu-logout">
+                <form action="/logout?_method=DELETE" method="POST">
+                  <button type="submit" class="btn btn-link" style="color: red; text-decoration: none;">Log
+                    Out</button>
+                </form>
+              </div>
+            </div>
+          </div>
       </div>
-      -->
-  <!--Untuk sudah masuk log-->
-  <div class="header-right">
-    <div class="timeline"><a href="">Timeline</a></div>
-    <a href="/upload"><span class="fa fa-plus-square-o"></span></a>
-    <span class="fa fa-bell-o"></span>
-    <span class="fa fa-comments-o"></span>
-    <div class="profile-dropdown">
-      <img id="profile-button" onclick="toggleProfileMenu()" src="img/profile8.png" />
-      <div id="profile-menu">
-        <div id="profile-menu-head">
-          <img id="profile-picture" src="img/profile8.png" />
+    </header>
+    <% } %>
+
+      <div id="contents">
+        <div class="what-we-do-intro">
+          <h1>Wujudkan inovasimu <br />di dunia nyata!</h1>
+          <p>Platform untuk membagikan ide Anda tentang produk inovatif dan memungkinkan <br />kerja kolaborasi dengan
+            pemilik ide lainnya.</p>
+        </div>
+
+        <div class="what-we-do-main">
+          <h1>Tentang Idea House</h1>
           <div>
-            <p id="profile-name">Jack Separo</p>
-            <p id="profile-email">jack.separo@gmail.com</p>
-          </div>
-        </div>
-        <div id="profile-menu-list">
-          <a class="profile-menu-item">Edit profil</a>
-          <a class="profile-menu-item">Ide</a>
-          <a class="profile-menu-item">Proyek</a>
-          <a class="profile-menu-item">Liked</a>
-          <a class="profile-menu-item">Fundraised</a>
-        </div>
-        <div id="profile-menu-logout">
-          <a class="profile-menu-item"><span>Log Out</span></a>
-        </div>
-      </div>
-    </div>
-    <!-- -->
-</header>
+            <div id="left">
+              <div class="about-text">
+                <p>Idea House merupakan sebuah aplikasi berbasis web yang dirancang sebagai sarana masyarakat Indonesia
+                  untuk menyalurkan
+                  ide yang mereka miliki. Dengan harapan, nantinya ide tersebut dapat teralisasikan dengan lebih mudah
+                  melalui kolaborasi
+                  beberapa pengguna yang sepemikiran dengan Sang pemilik ide. Oleh sebab itu, Idea House dapat disebut
+                  juga sebagai ‘House
+                  of Idea’, karena di platform ini siapapun dipersilakan untuk mengutarakan atau menyampaikan hasil dari
+                  pemikirannya ke
+                  dalam bentuk sebuah unggahan, yang dapat diakses oleh pengguna lain.</p>
+              </div>
 
-<div id="contents">
-  <div class="what-we-do-intro">
-    <h1>Wujudkan inovasimu di dunia nyata!</p>
-      <p>Platform untuk membagikan ide Anda tentang produk inovatif dan berkolaborasi dengan orang lain.</p>
-      <p>Mendukung dan membiayai ide-ide!</p>
-  </div>
-
-  <div class="what-we-do-main">
-    <h1>Tentang Idea House</h1>
-    <div>
-      <div id="left">
-        <div class="about-text">
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque sollicitudin scelerisque enim ac
-            gravida.
-            Ut nec iaculis felis. Vestibulum tempus neque in tincidunt dictum. Phasellus vitae dolor id orci viverra
-            malesuada quis eget dui. Cras tincidunt erat sodales massa facilisis, at finibus elit porttitor. Sed
-            tincidunt suscipit elit, in semper.</p>
-        </div>
-
-        <div class="option-button">
-          <a href="#"><button id="new-idea-button">Bagikan Ide Baru</button></a>
-          <a href="#"><button id="other-idea-button">Lihat Ide Orang Lain</button></a>
-        </div>
-      </div>
-      <div id="right">
-        <div class="what-we-do-point">
-          <img class="what-we-do-point-img" src="img/share.png" />
-          <div class="what-we-do-point-text">
-            <h2>Membagikan Ide</h2>
-            <p>Lorem ipsum</p>
-          </div>
-        </div>
-        <div class="what-we-do-point">
-          <img class="what-we-do-point-img" src="img/collaborate.png" />
-          <div class="what-we-do-point-text">
-            <h2>Kolaborasi Proyek</h2>
-            <p>Lorem ipsum</p>
-          </div>
-        </div>
-        <div class="what-we-do-point">
-          <img class="what-we-do-point-img" src="img/fundraise.png" />
-          <div class="what-we-do-point-text">
-            <h2>Penggalangan Dana</h2>
-            <p>Lorem ipsum</p>
+              <div class="option-button">
+                <% if (!req.isAuthenticated()) { %>
+                  <a href='/login'><button id="new-idea-button">Bagikan Ide Baru</button></a>
+                  <% } else { const url=`/users/${req.user.id}/upload`%>
+                    <a href=<%=url %> ><button id="new-idea-button">Bagikan Ide Baru</button></a>
+                    <% } %>
+                      <a href="/idea_catalog"><button id="other-idea-button">Lihat Ide Orang Lain</button></a>
+              </div>
+            </div>
+            <div id="right">
+              <div class="what-we-do-point">
+                <img class="what-we-do-point-img" src="img/share.png" />
+                <div class="what-we-do-point-text">
+                  <h2><b>Membagikan Ide</b></h2>
+                  <p>Anda dapat mempublikasi atau mengunggah ide yang Anda miliki.</p>
+                </div>
+              </div>
+              <div class="what-we-do-point">
+                <img class="what-we-do-point-img" src="img/collaborate.png" />
+                <div class="what-we-do-point-text">
+                  <h2><b>Kolaborasi Proyek</b></h2>
+                  <p>Anda dapat bekerja sama dengan para user yang sepemikiran dengan ide yang Anda buat guna membantu
+                    proses
+                    pengimplementasian ide.</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</div>

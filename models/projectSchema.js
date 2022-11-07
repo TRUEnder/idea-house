@@ -5,8 +5,8 @@ const projectSchema = new mongoose.Schema({
         type: String,
         require: true
     },
-    author: {
-        type: mongoose.SchemaTypes.ObjectId,
+    authors: {
+        type: [mongoose.SchemaTypes.ObjectId],
         require: true
     },
     created: {
@@ -21,7 +21,7 @@ const projectSchema = new mongoose.Schema({
         type: String,
         require: true
     },
-    category: {
+    categories: {
         type: [String],
         require: true
     },

@@ -4,12 +4,12 @@ const bodyParser = require('body-parser')
 const app = express()
 
 // Setting and Middleware
-
 app.set('view engine', 'ejs')
 app.set('views', __dirname + '/views')
 app.set('layout', 'layouts/layout')
 app.use(expressLayouts);
 app.use(bodyParser.urlencoded({ limit: '10mb', extended: false }))
+
 app.use(express.static('assets'))
 
 
@@ -28,22 +28,63 @@ const db = mongoose.connection
 db.on('error', (error) => { console.log(error) })
 db.once('open', () => { console.log('Connected to MongoDB') })
 
+// Database Schema
+const UserSchema = require('./models/userSchema')
+const IdeaSchema = require('./models/ideaSchema')
+const ProjectSchema = require('./models/projectSchema')
+
+// Local Passport authentication set up
+
+const initializePassport = require('./config/passport-config')
+const passport = initializePassport(
+    (email) => { return UserSchema.findOne({ email: email }) },
+    (id) => {
+        const user = UserSchema.findOne({ _id: id })
+        return user
+    }
+)
+
+// Session Management
+
+const session = require('express-session')
+const flash = require('express-flash')
+app.use(flash())
+app.use(session({
+    secret: 'secret',
+    resave: false,
+    saveUninitialized: false
+}))
+app.use(passport.session())
+app.use(passport.initialize())
+
 // Routing middleware
 
-const mainRouter = require('./routes/main')
-app.use('/', mainRouter)
+app.use((req, res, next) => {
+    console.log(req.isAuthenticated())
+    console.log(req.path)
+    console.log()
+    next()
+})
+
+const postRouter = require('./routes/postRouter')
+app.use('/post', postRouter)
+
+const usersRouter = require('./routes/usersRouter')
+app.use('/users/:id', usersRouter)
+
+const indexRouter = require('./routes/indexRouter')
+app.use('/', indexRouter)
 
 // Listening on port
 
 const port = 3000
-app.listen(port, () => {
-    console.log(`You are listening on http://localhost:${port} ...`)
-})
-
 const server = require('http').Server(app)
-const io = require('socket.io')(server)
 
-io.on('connection', (socket) => {
-    console.log('new user')
-    socket.emit('chat-message', 'Hello World')
+// Socket.io configuration
+
+const initializeIOServer = require('./config/socket-io-config')
+const io = initializeIOServer(server)
+
+server.listen(port, () => {
+    console.log(`You are listening on http://localhost:${port} ...`)
 })

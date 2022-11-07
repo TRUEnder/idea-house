@@ -1,0 +1,187 @@
+<% if (!req.isAuthenticated()) { %>
+  <header>
+    <div class="header-left">
+      <a href="/"><img class="logo" src="/img/idea-house.png" alt="Logo" /></a>
+    </div>
+
+    <div class="header-center">
+      <a href="/what_we_do">What we do?</a>
+      <a>How to use</a>
+    </div>
+
+    <div class="header-right">
+      <a href="/login">
+        <div>Login</div>
+      </a>
+      <a href="/register">
+        <div>Register</div>
+      </a>
+  </header>
+
+  <% } else { %>
+
+    <header>
+      <div class="header-left">
+        <% const url="/users/" + req.user.id %>
+          <a href=<%=url %>><img class="logo" src="/img/idea-house.png" alt="Logo" /></a>
+      </div>
+      <div class="header-center">
+        <a href="/what_we_do">What we do?</a>
+        <a>How to use</a>
+      </div>
+      <div class="header-right">
+
+        <% const timelineUrl=url + "/timeline" ; const uploadUrl=url + "/upload" ; const notifUrl=url + "/notification"
+          ; const chatUrl=url + "/chat" ; const profileUrl=url + "/profile" %>
+
+          <div class="timeline"><a href=<%=timelineUrl%>>Timeline</a></div>
+          <a href=<%=uploadUrl %>><span class="fa fa-plus-square-o"></span></a>
+          <a href=<%=notifUrl %>><span class="fa fa-bell-o"></span></a>
+          <a href=<%=chatUrl %>><i class="bi bi-chat-left-text"></i></a>
+          <div class="profile-dropdown">
+            <img id="profile-button" onclick="toggleProfileMenu()" src="/img/profile8.png" />
+            <div id="profile-menu">
+              <a href=<%=profileUrl %>>
+                <div id="profile-menu-head">
+                  <img id="profile-picture" src="/img/profile8.png" />
+                  <div>
+                    <p id="profile-name">
+                      <%= req.user.name %>
+                    </p>
+                    <p id="profile-email">
+                      <%= req.user.email %>
+                    </p>
+                  </div>
+                </div>
+              </a>
+              <div id="profile-menu-list">
+                <a href=<%=profileUrl%> class="profile-menu-item">Edit profil</a>
+                <a href=<%=profileUrl%> class="profile-menu-item">Ide</a>
+                <a href=<%=profileUrl%> class="profile-menu-item">Proyek</a>
+                <a href=<%=profileUrl%> class="profile-menu-item">Liked</a>
+              </div>
+              <div id="profile-menu-logout">
+                <form action="/logout?_method=DELETE" method="POST">
+                  <button type="submit" class="btn btn-link" style="color: red; text-decoration: none;">Log
+                    Out</button>
+                </form>
+              </div>
+            </div>
+          </div>
+      </div>
+    </header>
+    <% } %>
+
+      <main id="contents" class="d-flex">
+        <section class="post-main">
+          <h1 class="content-text">
+            <%= post.title %>
+          </h1>
+
+          <section id="post-data">
+            <section id="data-like">
+              <i class="bi bi-heart"></i>
+              <p class="data-text">
+                <%= post.like %>
+              </p>
+            </section>
+            <section id="data-view">
+              <i class="bi bi-eye"></i>
+              <p class="data-text">
+                <%= post.views %> tayangan
+              </p>
+            </section>
+          </section>
+
+          <section>
+            <% if (post.thumbnail==null) { %>
+              <img id="post-img" src="/img/placeholder.png"></img>
+              <p id="post-img-caption" class="content-text">Illustration of something</p>
+              <% } else { %>
+                <img id="post-img" src="/img/idea_1.png"></img>
+                <p id="post-img-caption" class="content-text">
+                  <%= post.thumbnail_desc %>
+                </p>
+                <% } %>
+          </section>
+
+          <p id="post-description" class="content-text">
+            <%= post.content %>
+          </p>
+        </section>
+
+        <section class="post-sidebar">
+          <section class="sidebar-section" id="author-sidebar">
+            <h2>Pembuat</h2>
+            <a href="">
+              <section id="author-profile">
+                <img id="author-picture" src="/img/profile6.png"></img>
+                <section>
+                  <p id="author-name">
+                    <%= author.name %>
+                  </p>
+                  <p id="author-follower">
+                    <%= followerCount %> pengikut
+                  </p>
+                </section>
+              </section>
+            </a>
+
+            <% if(req.isAuthenticated()) { %>
+              <% if( !(req.user.id==author._id) ) { %>
+                <section class="author-interaction d-flex">
+                  <% if(!hasFollow) { %>
+                    <form method='POST' action=<%=`/users/${req.user.id}/follow/${author._id}/${post._id}` %>>
+                      <button type="submit" class="follow-author"
+                        style="background-color: #FFFFFF; color: #FFC30B; border: 1px solid #FFC30B;">Follow</button>
+                    </form>
+                    <% } else { %>
+                      <form method='POST' action=<%=`/users/${req.user.id}/unfollow/${author._id}/${post._id}` %>>
+                        <button type="submit" class="follow-author"
+                          style="background-color: #3b3b3b; color: #ffffff;">Unfollow</button>
+                      </form>
+                      <a href=<%=`/users/${req.user.id}/chat/${author._id}` %>>
+                        <div class="chat-author">
+                          <i class="bi bi-envelope" style="color: white"></i>
+                        </div>
+                      </a>
+                      <% } %>
+                </section>
+                <% } } %>
+
+          </section>
+
+          <section class="sidebar-section" id="category-sidebar">
+            <h2>Kategori</h2>
+            <section id="category-list">
+              <% post.categories.forEach((category)=> { %>
+                <div class="category-item">
+                  <%=category %>
+                </div>
+                <% }) %>
+            </section>
+          </section>
+
+          <section class="sidebar-section" id="recommendation-sidebar">
+            <h2>You may also like</h2>
+            <section id="suggested-posts">
+              <% suggestedPosts.forEach((post)=> { %>
+                <% const suggestedUrl=`/post/${post.id}` %>
+                  <a href=<%=suggestedUrl%>>
+                    <section class="suggested-item">
+                      <p class="suggested-title">
+                        <%= post.title %>
+                      </p>
+                      <section class="suggested-author">
+                        <img class="suggested-author-picture" src="/img/placeholder.png"></img>
+                        <p class="suggested-author-name">
+                          <%= post.author %>
+                        </p>
+                      </section>
+                    </section>
+                  </a>
+                  <% }) %>
+            </section>
+          </section>
+        </section>
+      </main>

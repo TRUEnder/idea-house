@@ -19,14 +19,5 @@
   <input type="checkbox" id="agree-checkbox" onclick="toggleClickableButton()" />
   <label for="agree-checkbox">Saya menyetujui syarat dan ketentuan di atas</label>
   <br />
-  <a href="/"><button id="agree-button" disabled>Saya Setuju</button></a>
+  <a href="/login"><button id="agree-button" disabled>Saya Setuju</button></a>
 </div>
-<script>
-  function toggleClickableButton() {
-    if (document.getElementById("agree-checkbox").checked == true) {
-      document.getElementById("agree-button").disabled = false;
-    } else {
-      document.getElementById("agree-button").disabled = true;
-    }
-  }
-</script>

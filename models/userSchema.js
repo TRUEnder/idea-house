@@ -12,6 +12,15 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         require: true
+    },
+    follows: {
+        type: [mongoose.SchemaTypes.ObjectId]
+    },
+    ideas: {
+        type: [mongoose.SchemaTypes.ObjectId]
+    },
+    projects: {
+        type: [mongoose.SchemaTypes.ObjectId]
     }
 })
 

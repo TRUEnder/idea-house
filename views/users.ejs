@@ -1,131 +1,201 @@
 <header>
     <div class="header-left">
         <% const url="/users/" + user.id %>
-            <a href=<%=url %>><img class="logo" src="img/idea-house.png" alt="Logo" /></a>
-            <!-- <p class="header-title">Idea House</p> -->
+            <a href=<%=url %>><img class="logo" src="/img/idea-house.png" alt="Logo" /></a>
     </div>
     <div class="header-center">
         <a href="/what_we_do">What we do?</a>
         <a>How to use</a>
     </div>
-    <!--Untuk belum masuk log
     <div class="header-right">
-      <a href="login.html">Masuk log</a>
-      <a href="register.html">Daftar</a>
-    </div>
-    -->
-    <!--Untuk sudah masuk log-->
-    <div class="header-right">
-        <div class="timeline"><a href="">Timeline</a></div>
-        <a href="/upload"><span class="fa fa-plus-square-o"></span></a>
-        <span class="fa fa-bell-o"></span>
-        <span class="fa fa-comments-o"></span>
-        <div class="profile-dropdown">
-            <img id="profile-button" onclick="toggleProfileMenu()" src="img/profile8.png" />
-            <div id="profile-menu">
-                <div id="profile-menu-head">
-                    <img id="profile-picture" src="img/profile8.png" />
-                    <div>
-                        <p id="profile-name">
-                            <%= user.name %>
-                        </p>
-                        <p id="profile-email">
-                            <%= user.email %>
-                        </p>
+
+        <% const timelineUrl=url + "/timeline" ; const uploadUrl=url + "/upload" ; const notifUrl=url + "/notification"
+            ; const chatUrl=url + "/chat" ; const profileUrl=url + "/profile" %>
+
+            <div class="timeline"><a href=<%=timelineUrl%>>Timeline</a></div>
+            <a href=<%=uploadUrl %>><span class="fa fa-plus-square-o"></span></a>
+            <a href=<%=notifUrl %>><span class="fa fa-bell-o"></span></a>
+            <a href=<%=chatUrl %>><i class="bi bi-chat-left-text"></i></a>
+            <div class="profile-dropdown">
+                <img id="profile-button" onclick="toggleProfileMenu()" src="/img/profile8.png" />
+                <div id="profile-menu">
+                    <a href=<%=profileUrl %>>
+                        <div id="profile-menu-head">
+                            <img id="profile-picture" src="/img/profile8.png" />
+                            <div>
+                                <p id="profile-name">
+                                    <%= user.name %>
+                                </p>
+                                <p id="profile-email">
+                                    <%= user.email %>
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                    <div id="profile-menu-list">
+                        <a href=<%=profileUrl%> class="profile-menu-item">Edit profil</a>
+                        <a href=<%=profileUrl%> class="profile-menu-item">Ide</a>
+                        <a href=<%=profileUrl%> class="profile-menu-item">Proyek</a>
+                        <a href=<%=profileUrl%> class="profile-menu-item">Liked</a>
+                    </div>
+                    <div id="profile-menu-logout">
+                        <form action="/logout?_method=DELETE" method="POST">
+                            <button type="submit" class="btn btn-link" style="color: red; text-decoration: none;">Log
+                                Out</button>
+                        </form>
                     </div>
                 </div>
-                <div id="profile-menu-list">
-                    <a class="profile-menu-item">Edit profil</a>
-                    <a class="profile-menu-item">Ide</a>
-                    <a class="profile-menu-item">Proyek</a>
-                    <a class="profile-menu-item">Liked</a>
-                    <a class="profile-menu-item">Fundraised</a>
-                </div>
-                <div id="profile-menu-logout">
-                    <form action="/logout?_method=DELETE" method="POST">
-                        <button type="submit" class="btn btn-link" style="color: red; text-decoration: none;">Log
-                            Out</button>
-                    </form>
-                </div>
             </div>
-        </div>
-        <!-- -->
+    </div>
 </header>
 
 <div id="contents">
     <div class="landing-page-top">
-        <a>Software</a>
-        <a>Innovation</a>
-        <a>Art</a>
+        <a href="/idea_catalog">Home & Kitchen</a>
+        <a href="/idea_catalog">Sport Utilities</a>
+        <a href="/idea_catalog">IT & Software</a>
+        <a href="/idea_catalog">Engineering</a>
+        <a href="/idea_catalog">Fashion</a>
+        <a href="/idea_catalog">Entertainment</a>
     </div>
 
     <div class="landing-page-intro">
         <div class="intro">
             <div class="intro-title">
-                Welcome to <br>House of Idea!
+                Welcome to <br />House of Idea!
             </div>
             <div class="intro-text">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam et orci laoreet, laoreet urna non,
-                bibendum
-                nisl. Orci
-                varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+                bibendum nisl. Orci varius natoque penatibus.
             </div>
             <div id="intro-option">
-                <button id="post-button">Post Idea</button>
-                <button id="catalog-button">Get Some Idea</button>
+                <a href=<%=uploadUrl %> ><button id="post-button">Post Idea</button></a>
+                <a href="/idea_catalog"><button id="catalog-button">Get Some Idea</button></a>
             </div>
         </div>
-        <img src="img/lamp.png" alt="">
+        <img id="lamp" src="/img/lamp.png" alt="" />
     </div>
 
     <div class="landing-page-catalog">
-        <h1>Katalog Ide</h1>
-        <h2>Ide Populer</h2>
+        <h1><a href="/idea_catalog">Katalog Ide</a></h1>
+        <h2><a href="/idea_catalog">Ide Populer</a></h2>
         <div class="idea-list">
             <div class="idea-item">
-                <image class="idea-thumbnail" src="placeholder.png" />
-                <p>Lorem ipsum</p>
+                <image class="idea-thumbnail" src="/img/placeholder.png" />
+                <div class="idea-desc">
+                    <div class="idea-title">Title</div>
+                    <div class="idea-text">Description is here</div>
+                </div>
             </div>
             <div class="idea-item">
-                <image class="idea-thumbnail" src="placeholder.png" />
-                <p>Lorem ipsum</p>
+                <image class="idea-thumbnail" src="/img/placeholder.png" />
+                <div class="idea-desc">
+                    <div class="idea-title">Title</div>
+                    <div class="idea-text">Description is here</div>
+                </div>
             </div>
             <div class="idea-item">
-                <image class="idea-thumbnail" src="placeholder.png" />
-                <p>Lorem ipsum</p>
+                <image class="idea-thumbnail" src="/img/placeholder.png" />
+                <div class="idea-desc">
+                    <div class="idea-title">Title</div>
+                    <div class="idea-text">Description is here</div>
+                </div>
             </div>
             <div class="idea-item">
-                <image class="idea-thumbnail" src="placeholder.png" />
-                <p>Lorem ipsum</p>
+                <image class="idea-thumbnail" src="/img/placeholder.png" />
+                <div class="idea-desc">
+                    <div class="idea-title">Title</div>
+                    <div class="idea-text">Description is here</div>
+                </div>
+            </div>
+            <div class="idea-item">
+                <image class="idea-thumbnail" src="/img/placeholder.png" />
+                <div class="idea-desc">
+                    <div class="idea-title">Title</div>
+                    <div class="idea-text">Description is here</div>
+                </div>
+            </div>
+            <div class="idea-item">
+                <image class="idea-thumbnail" src="/img/placeholder.png" />
+                <div class="idea-desc">
+                    <div class="idea-title">Title</div>
+                    <div class="idea-text">Description is here</div>
+                </div>
             </div>
         </div>
-        <h2>Proyek Populer</h2>
+
+        <h2><a href="idea_catalog.html">Proyek Populer</a></h2>
         <div class="idea-list">
             <div class="idea-item">
-                <image class="idea-thumbnail" src="placeholder.png" />
-                <p>Lorem ipsum</p>
+                <image class="idea-thumbnail" src="/img/placeholder.png" />
+                <div class="idea-desc">
+                    <div class="idea-title">Title</div>
+                    <div class="idea-text">Description is here</div>
+                </div>
             </div>
             <div class="idea-item">
-                <image class="idea-thumbnail" src="placeholder.png" />
-                <p>Lorem ipsum</p>
+                <image class="idea-thumbnail" src="/img/placeholder.png" />
+                <div class="idea-desc">
+                    <div class="idea-title">Title</div>
+                    <div class="idea-text">Description is here</div>
+                </div>
             </div>
             <div class="idea-item">
-                <image class="idea-thumbnail" src="placeholder.png" />
-                <p>Lorem ipsum</p>
+                <image class="idea-thumbnail" src="/img/placeholder.png" />
+                <div class="idea-desc">
+                    <div class="idea-title">Title</div>
+                    <div class="idea-text">Description is here</div>
+                </div>
             </div>
             <div class="idea-item">
-                <image class="idea-thumbnail" src="placeholder.png" />
-                <p>Lorem ipsum</p>
+                <image class="idea-thumbnail" src="/img/placeholder.png" />
+                <div class="idea-desc">
+                    <div class="idea-title">Title</div>
+                    <div class="idea-text">Description is here</div>
+                </div>
+            </div>
+            <div class="idea-item">
+                <image class="idea-thumbnail" src="/img/placeholder.png" />
+                <div class="idea-desc">
+                    <div class="idea-title">Title</div>
+                    <div class="idea-text">Description is here</div>
+                </div>
+            </div>
+            <div class="idea-item">
+                <image class="idea-thumbnail" src="/img/placeholder.png" />
+                <div class="idea-desc">
+                    <div class="idea-title">Title</div>
+                    <div class="idea-text">Description is here</div>
+                </div>
             </div>
         </div>
-        <h2>Kategori</h2>
+
+        <h2><a href="/idea_catalog">Kategori</a></h2>
         <div class="category-list">
-            <image class="category-thumbnail" src="placeholder.png" />
-            <image class="category-thumbnail" src="placeholder.png" />
-            <image class="category-thumbnail" src="placeholder.png" />
-            <image class="category-thumbnail" src="placeholder.png" />
-            <image class="category-thumbnail" src="placeholder.png" />
-            <image class="category-thumbnail" src="placeholder.png" />
+            <div class="category" onclick="location.href='/idea_catalog'" style="cursor: pointer">
+                <image class="category-thumbnail" src="/img/home-kitchen.png" />
+                <div class="category-desc"><b>Home & Kitchen</b></div>
+            </div>
+            <div class="category" onclick="location.href='/idea_catalog'" style="cursor: pointer">
+                <image class="category-thumbnail" src="/img/software.png" />
+                <div class="category-desc"><b>IT & Software</b></div>
+            </div>
+            <div class="category" onclick="location.href='/idea_catalog'" style="cursor: pointer">
+                <image class="category-thumbnail" src="/img/engineering.png" />
+                <div class="category-desc"><b>Engineering</b></div>
+            </div>
+            <div class="category" onclick="location.href='/idea_catalog'" style="cursor: pointer">
+                <image class="category-thumbnail" src="/img/sport.png" />
+                <div class="category-desc"><b>Sports</b></div>
+            </div>
+            <div class="category" onclick="location.href='/idea_catalog'" style="cursor: pointer">
+                <image class="category-thumbnail" src="/img/fashion.png" />
+                <div class="category-desc"><b>Fashion</b></div>
+            </div>
+            <div class="category" onclick="location.href='/idea_catalog'" style="cursor: pointer">
+                <image class="category-thumbnail" src="/img/entertainment.png" />
+                <div class="category-desc"><b>Entertainment</b></div>
+            </div>
         </div>
     </div>
 </div>

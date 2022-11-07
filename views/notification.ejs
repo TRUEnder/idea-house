@@ -49,44 +49,36 @@
   </div>
 </header>
 
-<div id="contents">
-  <% const postUrl=`/users/${user.id}/upload` %>
-    <form action=<%=postUrl %> method="POST" class="d-flex">
-      <div class="idea-main">
-        <input name="title" type="text" id="input-title" defaultValue="Judul" placeholder="Judul"></input>
-        <textarea name="content" id="input-description" placeholder="Jelaskan ide Anda di sini"></textarea>
-      </div>
+<div class="main-container">
+  <div class="notification-full">
+    <h2>Notifikasi</h2>
 
-      <div class="idea-sidebar">
-        <h2>Kategori</h2>
-        <div class="category-list">
-          <div class="category-item">
-            <input value="Home & Kitchen" name="category" id="category1" type="checkbox" />
-            <label for="category1">Home & Kitchen</label>
-          </div>
-          <div class="category-item">
-            <input value="IT & Software" name="category" id="category2" type="checkbox" />
-            <label for="category2">IT & Software</label>
-          </div>
-          <div class="category-item">
-            <input value="Engineering" name="category" id="category3" type="checkbox" />
-            <label for="category3">Engineering</label>
-          </div>
-          <div class="category-item">
-            <input value="Sport Utilities" name="category" id="category4" type="checkbox" />
-            <label for="category4">Sports Utilities</label>
-          </div>
-          <div class="category-item">
-            <input value="Fashion" name="category" id="category5" type="checkbox" />
-            <label for="category5">Fashion</label>
-          </div>
-          <div class="category-item">
-            <input value="Entertainment" name="category" id="category6" type="checkbox" />
-            <label for="category6">Entertainment</label>
-          </div>
-        </div>
-
-        <button type="submit" id="publish-button">Bagikan</button>
-      </div>
-    </form>
+    <section class="notification-box">
+      <section class="notification-item">
+        <section class="notification-description one-person">
+          <img src="/img/placeholder.png"></img>
+          <p><b>Michelia</b> mulai mengikutimu</p>
+        </section>
+        <img class="notification-thumbnail empty"></img>
+      </section>
+      <section class="notification-item">
+        <section class="notification-description multi-person">
+          <section class="profile-picture-list">
+            <img src="/img/placeholder.png"></img>
+            <img src="/img/placeholder.png"></img>
+            <img src="/img/placeholder.png"></img>
+          </section>
+          <p><b>Alexander</b> dan 2 lainnya menyukai pos Idemu</p>
+        </section>
+        <img class="notification-thumbnail"></img>
+      </section>
+      <section class="notification-item">
+        <section class="notification-description one-person">
+          <img src="/img/placeholder.png"></img>
+          <p><b>Patrick</b> menyukai pos Proyekmu</p>
+        </section>
+        <img class="notification-thumbnail"></img>
+      </section>
+    </section>
+  </div>
 </div>

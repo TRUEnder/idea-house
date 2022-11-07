@@ -56,7 +56,7 @@
         <section class="chat-tabs">
 
             <a href="">
-                <section class="chat-tab" id="group1-tab" onclick="">
+                <section class="chat-tab" id="group1-tab">
                     <img src="/img/profile6.png"></img>
                     <section class="chat-tab-text">
                         <section class="chat-tab-top">
@@ -74,11 +74,50 @@
         </section>
     </section>
 
-    <section id="default-content">
-        <p class="default-text-top">Pilih Obrolan</p>
-        <p class="default-text-center">atau</p>
-        <p class="default-text-bottom">Mulai Obrolan Baru</p>
+    <section class="chat-content">
+
+        <section id="private1-content">
+            <section class="chat-head">
+                <img src="/img/profile6.png"></img>
+                <h2>
+                    <%= target.name%>
+                </h2>
+            </section>
+            <section class="chat-texts">
+                <p class="chat-message received">Hi!</p>
+                <p class="chat-message received">I just saw your new post, n im interested w it. Would you mind to
+                    discuss it
+                    w me?</p>
+                <p class="chat-message sent">Oh hi! sure sureee</p>
+                <p class="chat-message received">before that, im alexandra nice to meet you!!!</p>
+                <p class="chat-message sent">haha nice to meet you tooo! im jack</p>
+                <p class="chat-message sent">so what are we gonna talkin abt?</p>
+                <p class="chat-message received">oh yea! first of all ive read your idea that you post recently n thats
+                    so
+                    goodd ngl</p>
+                <p class="chat-message received">like how can you think about tht? Im so curioussssss</p>
+                <p class="chat-message sent">idk but suddenly tht idea comes to my mind n i do some research for a
+                    minute n
+                    post itttt. What do you think?</p>
+                <p class="chat-message received">no but actually seriously</p>
+                <p class="chat-message received">not long a time ago, 2 or 3 days ago I thnk abt object tht you post
+                    like idk
+                    its so unpredictable n i saw your post n im like oh god...</p>
+                <p class="chat-message received">I think about that too!! oh my god haha</p>
+            </section>
+            <section class="chat-input">
+                <textarea placeholder="Pesan Baru..." style="max-height: 60px; height: 33px"
+                    oninput="resizeChatInput(this)"></textarea>
+                <i class="bi bi-send-fill"></i>
+            </section>
+        </section>
+
     </section>
 </main>
+
+<script>
+    var chatContainer = document.getElementsByClassName("chat-texts")[0]
+    chatContainer.scrollTop = chatContainer.scrollHeight
+</script>
 
 <script src="../clientChat.js"></script>

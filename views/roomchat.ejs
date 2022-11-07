@@ -105,10 +105,13 @@
                     its so unpredictable n i saw your post n im like oh god...</p>
                 <p class="chat-message received">I think about that too!! oh my god haha</p>
             </section>
+
             <section class="chat-input">
-                <textarea placeholder="Pesan Baru..." style="max-height: 60px; height: 33px"
-                    oninput="resizeChatInput(this)"></textarea>
-                <i class="bi bi-send-fill"></i>
+                <form action=<%=`/users/${req.user.id}/chat/${roomId}` %> method="POST">
+                    <textarea name="message" id="message-input" placeholder="Pesan Baru..."
+                        style="max-height: 60px; height: 33px" oninput="resizeChatInput(this)"></textarea>
+                    <button type="submit"><i class="bi bi-send-fill"></i></button>
+                </form>
             </section>
         </section>
 

@@ -75,15 +75,13 @@ app.use('/users/:id', usersRouter)
 const indexRouter = require('./routes/indexRouter')
 app.use('/', indexRouter)
 
-// Listening on port
+// Server configuration
 
 const port = 3000
 const server = require('http').Server(app)
 
-// Socket.io configuration
-
 const initializeIOServer = require('./config/socket-io-config')
-const io = initializeIOServer(server)
+initializeIOServer(server)
 
 server.listen(port, () => {
     console.log(`You are listening on http://localhost:${port} ...`)

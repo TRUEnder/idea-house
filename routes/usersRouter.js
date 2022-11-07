@@ -102,8 +102,14 @@ router.get('/chat/:room', blockForNotAuthenticated, async (req, res) => {
     res.render('roomchat.ejs', { title: `Room Chat`, user, roomId: req.params.room, target })
 })
 
+router.post('/chat/:room', blockForNotAuthenticated, async (req, res) => {
+    // io.emit('send-chat-message', req.params.room, req.body.message)
+
+    res.redirect(`/users/${req.user.id}/chat/${req.params.room}`)
+})
+
 // IO Server
 
-
+// const io = require(./config/socket-io-config)
 
 module.exports = router

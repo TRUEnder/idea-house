@@ -1,7 +1,9 @@
-const io = require('socket.io')
+const socketio = require('socket.io')
 
 function initializeIOServer(server) {
-    return io(server)
+    const io = socketio(server)
+
+    return io
 }
 
 module.exports = initializeIOServer

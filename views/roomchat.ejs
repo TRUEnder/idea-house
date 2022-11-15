@@ -107,7 +107,7 @@
             </section>
 
             <section class="chat-input">
-                <form action=<%=`/users/${req.user.id}/chat/${roomId}` %> method="POST">
+                <form action=<%=`/users/${user.id}/chat/${roomId}` %> method="POST">
                     <textarea name="message" id="message-input" placeholder="Pesan Baru..."
                         style="max-height: 60px; height: 33px" oninput="resizeChatInput(this)"></textarea>
                     <button type="submit"><i class="bi bi-send-fill"></i></button>

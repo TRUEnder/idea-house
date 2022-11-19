@@ -88,5 +88,5 @@ const initializeIOServer = require('./config/socket-io-config')
 initializeIOServer(server)
 
 server.listen(process.env.PORT | port, () => {
-    console.log(`You are listening on http://localhost:${process.env.port} ...`)
+    console.log(`You are listening on http://localhost:${process.env.PORT} ...`)
 })

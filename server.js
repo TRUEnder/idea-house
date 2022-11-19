@@ -21,7 +21,7 @@ app.use(express.static('assets'))
 
 const mongoose = require('mongoose')
 const dbName = 'idea-house'
-mongoose.connect('mongodb+srv://truender:idea-house10@idea-house.ynhigcp.mongodb.net/?retryWrites=true&w=majority', {
+mongoose.connect(process.env.DATABASE_URL, {
     dbName: 'idea-house',
     useNewUrlParser: true,
     useUnifiedTopology: true

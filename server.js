@@ -81,12 +81,11 @@ app.use('/', indexRouter)
 
 // Server configuration
 
-const port = 3000
 const server = require('http').Server(app)
 
 const initializeIOServer = require('./config/socket-io-config')
 initializeIOServer(server)
 
-server.listen(port, () => {
-    console.log(`You are listening on http://localhost:${port} ...`)
+server.listen(process.env.port, () => {
+    console.log(`You are listening on http://localhost:${process.env.port} ...`)
 })

@@ -1,0 +1,18 @@
+<div id="profile-set-container" class="d-flex justify-content-center align-items-center">
+    <h4 id="profile-set-header">Set Up Profile Photo</h1>
+        <a href="">
+            <div id="profile-clickable"></div>
+        </a>
+        <div id="profile-name">
+            <%= user.username %>
+        </div>
+        <div>Choose your profile photo from your local storage</div>
+        <div class="set-photo-button-container d-flex">
+            <a href="/">
+                <div id="set-photo">Upload</div>
+            </a>
+            <a href=<%=`/users/${user.id}` %> >
+                <div id="skip-set-photo">Skip for now</div>
+            </a>
+        </div>
+</div>

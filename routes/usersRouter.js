@@ -10,11 +10,23 @@ const UserSchema = require('../models/userSchema')
 const IdeaSchema = require('../models/ideaSchema')
 const ProjectSchema = require('../models/projectSchema')
 
+// Google Cloud Storage for Image
+const bucketName = 'idea-house-image';
+
+const { Storage } = require('@google-cloud/storage');
+const storage = new Storage({
+    keyFilename: '../peak-bebop-369213-77ec9efb5616.json',
+});
+
+
 const initializePassport = require('../config/passport-config')
 const passport = initializePassport(
     async (email) => { return await UserSchema.findOne({ email: email }) },
     async (id) => { return await UserSchema.findOne({ _id: id }) }
 )
+
+// Current user
+const { user } = require('../config/currentUser')
 
 // Routing
 
@@ -33,7 +45,6 @@ router.get('/notification', blockForNotAuthenticated, (req, res) => {
 })
 
 router.get('/profile', blockForNotAuthenticated, async (req, res) => {
-    const user = await UserSchema.findOne({ _id: req.user.id })
     const posts = await IdeaSchema.find({ _id: { $in: user.ideas } })
     const userFollower = await UserSchema.find({ follows: { $all: [user._id] } })
     const followerCount = userFollower.length;
@@ -61,7 +72,6 @@ router.post('/upload', blockForNotAuthenticated, async (req, res) => {
         await idea.save()
 
         const ideaInstance = await IdeaSchema.findOne({ title: req.body.title, created: now })
-        const user = await UserSchema.findOne({ _id: req.user.id })
         user.ideas.push(ideaInstance._id)
         await user.save()
 
@@ -72,7 +82,6 @@ router.post('/upload', blockForNotAuthenticated, async (req, res) => {
 })
 
 router.post('/follow/:authorid/:postid', blockForNotAuthenticated, async (req, res) => {
-    const user = await UserSchema.findOne({ _id: req.user.id })
     user.follows.push(req.params.authorid)
     await user.save()
 
@@ -80,8 +89,6 @@ router.post('/follow/:authorid/:postid', blockForNotAuthenticated, async (req, r
 })
 
 router.post('/unfollow/:authorid/:postid', blockForNotAuthenticated, async (req, res) => {
-    const user = await UserSchema.findOne({ _id: req.user.id })
-
     const indexOfAuthor = user.follows.indexOf(req.params.authorid)
     if (indexOfAuthor > -1) {
         user.follows.splice(indexOfAuthor, 1)
@@ -92,12 +99,10 @@ router.post('/unfollow/:authorid/:postid', blockForNotAuthenticated, async (req,
 })
 
 router.get('/chat', blockForNotAuthenticated, async (req, res) => {
-    const user = await UserSchema.findOne({ _id: req.user.id })
     res.render('chat.ejs', { title: 'Chat', user })
 })
 
 router.get('/chat/:room', blockForNotAuthenticated, async (req, res) => {
-    const user = await UserSchema.findOne({ _id: req.user.id })
     const target = await UserSchema.findOne({ _id: req.params.room })
     res.render('roomchat.ejs', { title: `Room Chat`, user, roomId: req.params.room, target })
 })
@@ -107,6 +112,7 @@ router.post('/chat/:room', blockForNotAuthenticated, async (req, res) => {
 
     res.redirect(`/users/${req.user.id}/chat/${req.params.room}`)
 })
+
 
 // IO Server
 

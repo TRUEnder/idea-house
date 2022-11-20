@@ -23,6 +23,9 @@ const passport = initializePassport(
 const blockForAuthenticated = require('../config/blockForAuthenticated')
 const blockForNotAuthenticated = require('../config/blockForNotAuthenticated')
 
+// Get User Info
+const { getUser } = require('../config/currentUser')
+
 router.get('/', blockForAuthenticated, (req, res) => {
     res.render('index.ejs', { title: 'Idea House' })
 })
@@ -36,19 +39,34 @@ router.get('/login', blockForAuthenticated, (req, res) => {
 })
 
 router.post('/register', async (req, res) => {
-    const hashedPass = await bcrypt.hash(req.body.password, 10)
-    const user = new UserSchema({
-        name: req.body.name,
-        email: req.body.email,
-        password: hashedPass
-    })
+    if (req.body.password !== req.body.password_confirm) {
+        res.render('register.ejs', {
+            title: 'Register',
+            errorMessage: "Password confirmation doesn't match"
+        })
+    } else {
+        const hashedPass = await bcrypt.hash(req.body.password, 10)
+        const newUser = new UserSchema({
+            name: req.body.name,
+            email: req.body.email,
+            password: hashedPass
+        })
 
-    try {
-        await user.save()
-        res.redirect('/register/terms_and_conditions')
-    } catch {
-        res.render('register.ejs',
-            { title: 'Register', errorMessage: 'Something went wrong. Please try again.' })
+        try {
+            await newUser.save()
+
+            getUser(newUser._id).then(() => {
+                res.redirect('/login')
+            })
+        } catch (e) {
+            if (e.message.slice(0, 6) == 'E11000') {
+                res.render('register.ejs',
+                    { title: 'Register', errorMessage: 'Email is already used' })
+            } else {
+                res.render('register.ejs',
+                    { title: 'Register', errorMessage: 'Something went wrong. Please try again.' })
+            }
+        }
     }
 })
 
@@ -57,7 +75,9 @@ router.post('/login', passport.authenticate('local', {
     failureFlash: true
 }),
     (req, res) => {
-        res.redirect(`/users/${req.user.id}`)
+        getUser(req.user.id).then(() => {
+            res.redirect(`/users/${req.user._id}/`)
+        })
     }
 )
 
@@ -100,35 +120,6 @@ router.get('/idea_catalog', async (req, res) => {
 
     res.render('idea_catalog.ejs', { title: 'Idea Catalog', req, ideasData })
 })
-
-// TESTING PURPOSE
-
-router.get('/alluser', async (req, res) => {
-    console.log(req.user.name)
-    try {
-        const users = await UserSchema.find()
-        res.render('testing/allUsers.ejs', { title: 'All User', users: users })
-    } catch {
-        res.send('Something is wrong. Try again')
-    }
-})
-router.get('/allidea', async (req, res) => {
-    try {
-        const ideas = await IdeaSchema.find()
-        res.render('testing/allIdeas.ejs', { title: 'All Idea', ideas: ideas })
-    } catch {
-        res.send('Something is wrong. Try again')
-    }
-})
-router.get('/allproject', async (req, res) => {
-    try {
-        const projects = await ProjectSchema.find()
-        res.render('testing/allProjects.ejs', { title: 'All User', projects: projects })
-    } catch {
-        res.send('Something is wrong. Try again')
-    }
-})
-//
 
 router.use((req, res) => {
     res.statusCode = 404

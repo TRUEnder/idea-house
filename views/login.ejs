@@ -1,16 +1,16 @@
-<div class="form-container">
-    <div class="account-form">
-        <h1>Login</h1>
-        <% if (messages.error) { %>
+<div class="account-form" id="login-form">
+    <h1>Login</h1>
+    <% if (messages.error) { %>
+        <div class="error-message">
             <%= messages.error %>
-                <% } %>
+        </div>
+        <% } %>
 
-                    <form action="/login" method="POST">
-                        <input type="text" placeholder="Masukkan Email" name="email"></input>
-                        <%- include('partials/password') %>
-                            <br><br>
-                            <button class="main-button" type="submit">Log In</button>
-                            <a class="secondary" href="/register">Register</a>
-                    </form>
-    </div>
+            <form action="/login" method="POST">
+                <input type="email" placeholder="Masukkan Email" name="email" autocomplete="off"></input>
+                <%- include('partials/password') %>
+                    <br><br>
+                    <button class="main-button" type="submit">Log In</button>
+                    <a class="secondary" href="/register">Register</a>
+            </form>
 </div>

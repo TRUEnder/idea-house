@@ -88,5 +88,8 @@ const initializeIOServer = require('./config/socket-io-config')
 initializeIOServer(server)
 
 server.listen(process.env.PORT | port, () => {
-    console.log(process.env.PORT)
+    if (process.env.PORT == null)
+        console.log(`You're listening on port ${port}...`)
+    else
+        console.log(process.env.PORT)
 })

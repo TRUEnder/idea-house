@@ -1,15 +1,18 @@
-<div class="account-form">
+<div class="account-form" id="register-form">
     <h1>Register</h1>
-    <form action="/register" method="post">
-        <% if (locals.errorMessage !=null) {%>
+    <% if (locals.errorMessage !=null) {%>
+        <div class="error-message">
             <%= errorMessage %>
-                <%} %>
-                    <input name="name" type="text" placeholder="Nama" required>
-                    <input name="email" type="email" placeholder="Email" required>
-                    <%- include('partials/password') %>
-                        <input type="password" placeholder="Konfirmasi Kata Sandi"></input>
-                        <button type="submit" class="main-button">Register</button>
-                        <a class="secondary" href="/login">Log In</a>
-    </form>
+        </div>
+        <%} %>
+
+            <form action="/register" method="post">
+                <input name="name" type="text" placeholder="Nama" required minlength="6" maxlength="21">
+                <input name="email" type="email" placeholder="Email" required autocomplete="off">
+                <%- include('partials/password') %>
+                    <input name="password_confirm" type="password" placeholder="Konfirmasi Kata Sandi" required></input>
+                    <button type="submit" class="main-button">Register</button>
+                    <a class="secondary" href="/login">Log In</a>
+            </form>
 
 </div>

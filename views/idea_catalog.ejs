@@ -99,7 +99,11 @@
                         <%= idea.title %>
                       </h2>
                       <p class="idea-description">
-                        <%= idea.content.slice(0, 140).concat(' ...') %>
+                        <% if (idea.content.length> 140 ) {%>
+                          <%= idea.content.slice(0, 140).concat(' ...') %>
+                            <% } else { %>
+                              <%= idea.content %>
+                                <% } %>
                       </p>
                       <section class="idea-data">
                         <img class="idea-author" src="img/profile8.png" alt="Foto profil pembuat pos"></img>

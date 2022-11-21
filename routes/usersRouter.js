@@ -32,8 +32,23 @@ const { user } = require('../config/currentUser')
 
 const blockForNotAuthenticated = require('../config/blockForNotAuthenticated')
 
-router.get('/', blockForNotAuthenticated, (req, res) => {
-    res.render('users.ejs', { title: 'Idea House', user: req.user })
+router.get('/', blockForNotAuthenticated, async (req, res) => {
+    const popularIdeas = await IdeaSchema.find().limit(4)
+
+    const recentIdeas = await IdeaSchema.find().limit(4)
+
+    const popularIdeaAuthor = []
+    for (let i = 0; i < 4; i++) {
+        let user = await UserSchema.findOne({ _id: popularIdeas[i].author })
+        popularIdeaAuthor.push(user.name)
+    }
+    const recentIdeaAuthor = []
+    for (let i = 0; i < 4; i++) {
+        let user = await UserSchema.findOne({ _id: recentIdeas[i].author })
+        recentIdeaAuthor.push(user.name)
+    }
+
+    res.render('users.ejs', { title: 'Idea House', user, popularIdeas, recentIdeas, popularIdeaAuthor, recentIdeaAuthor })
 })
 
 router.get('/upload', blockForNotAuthenticated, (req, res) => {

@@ -8,12 +8,15 @@ router.use(bodyParser.urlencoded({ extended: false }))
 const UserSchema = require('../models/userSchema')
 const IdeaSchema = require('../models/ideaSchema')
 const ProjectSchema = require('../models/projectSchema')
+const LikeSchema = require('../models/likeSchema')
 
 const initializePassport = require('../config/passport-config')
 const passport = initializePassport(
     async (email) => { return await UserSchema.findOne({ email: email }) },
     async (id) => { return await UserSchema.findOne({ _id: id }) }
 )
+
+const { user } = require('../config/currentUser')
 
 // Routing
 
@@ -41,9 +44,21 @@ router.get('/:id', async (req, res) => {
 
     let hasFollow = false
     if (req.isAuthenticated()) {
-        const user = await UserSchema.findOne({ _id: req.user.id })
         if (user.follows != null) {
             hasFollow = user.follows.includes(author._id)
+        }
+    }
+
+    let hasLike = false
+    if (req.isAuthenticated()) {
+        const allLikeFromYou = await LikeSchema.find({ user_id: req.user.id })
+        if (allLikeFromYou != null) {
+            for (let i = 0; i < allLikeFromYou.length; i++) {
+                if (allLikeFromYou[i].idea_id.valueOf() == post._id.valueOf()) {
+                    hasLike = true
+                    break
+                }
+            }
         }
     }
 
@@ -53,9 +68,34 @@ router.get('/:id', async (req, res) => {
         post,
         author,
         hasFollow,
+        hasLike,
         followerCount,
         suggestedPosts
     })
+})
+
+router.post('/:id/like', async (req, res) => {
+    if (req.body.hasLike === 'false') {
+        const like = new LikeSchema({
+            user_id: req.user.id,
+            idea_id: req.params.id
+        })
+        await like.save()
+
+        const post = await IdeaSchema.findOne({ _id: req.params.id })
+        post.like++
+        await post.save()
+
+    } else {
+
+        await LikeSchema.deleteOne({ $and: [{ user_id: req.user.id }, { idea_id: req.params.id }] })
+
+        const post = await IdeaSchema.findOne({ _id: req.params.id })
+        post.like--
+        await post.save()
+    }
+
+    res.redirect(`/post/${req.params.id}`)
 })
 
 module.exports = router

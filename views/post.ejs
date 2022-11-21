@@ -78,27 +78,51 @@
             <%= post.title %>
           </h1>
 
-          <section id="post-data">
-            <section id="data-like">
-              <i class="bi bi-heart"></i>
-              <p class="data-text">
-                <%= post.like %>
-              </p>
-            </section>
-            <section id="data-view">
-              <i class="bi bi-eye"></i>
-              <p class="data-text">
-                <%= post.views %> tayangan
-              </p>
-            </section>
+          <section id="post-feed">
+            <% if (req.isAuthenticated()) { %>
+              <form action=<%=`/post/${post._id}/like` %> method="POST">
+                <% if (!hasLike) { %>
+                  <input type="text" name="hasLike" value="false" hidden />
+                  <button type="submit" id="post-like-button">
+                    <i class="bi bi-hand-thumbs-up-fill"></i>
+                    Like
+                  </button>
+                  <% } else { %>
+                    <input type="text" name="hasLike" value="true" hidden />
+                    <button type="submit" id="post-like-button"
+                      style="background-color: #000000; color: rgb(255, 255, 255);">
+                      <i class="bi bi-hand-thumbs-up-fill" style="color: #FFCB2D"></i>
+                      Unlike
+                    </button>
+                    <% } %>
+              </form>
+              <% } %>
+                <section id="post-data" class="d-flex">
+                  <section id="data-like">
+                    <% if (!hasLike) { %>
+                      <i class="bi bi-heart"></i>
+                      <% } else { %>
+                        <i class="bi bi-heart-fill" style="color: red"></i>
+                        <% } %>
+                          <p class="data-text">
+                            <%= post.like %>
+                          </p>
+                  </section>
+                  <section id="data-view">
+                    <i class="bi bi-eye"></i>
+                    <p class="data-text">
+                      <%= post.views %> tayangan
+                    </p>
+                  </section>
+                </section>
           </section>
 
           <section>
             <% if (post.thumbnail==null) { %>
-              <img id="post-img" src="/img/placeholder.png"></img>
+              <img id="post-img" src="/img/thumbnail_placeholder.jpg"></img>
               <p id="post-img-caption" class="content-text">Illustration of something</p>
               <% } else { %>
-                <img id="post-img" src="/img/idea_1.png"></img>
+                <img id="post-img" src="/img/thumbnail_placeholder.jpg"></img>
                 <p id="post-img-caption" class="content-text">
                   <%= post.thumbnail_desc %>
                 </p>

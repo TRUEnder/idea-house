@@ -26,8 +26,23 @@ const blockForNotAuthenticated = require('../config/blockForNotAuthenticated')
 // Get User Info
 const { getUser } = require('../config/currentUser')
 
-router.get('/', blockForAuthenticated, (req, res) => {
-    res.render('index.ejs', { title: 'Idea House' })
+router.get('/', blockForAuthenticated, async (req, res) => {
+    const popularIdeas = await IdeaSchema.find().limit(4)
+
+    const recentIdeas = await IdeaSchema.find().limit(4)
+
+    const popularIdeaAuthor = []
+    for (let i = 0; i < 4; i++) {
+        let user = await UserSchema.findOne({ _id: popularIdeas[i].author })
+        popularIdeaAuthor.push(user.name)
+    }
+    const recentIdeaAuthor = []
+    for (let i = 0; i < 4; i++) {
+        let user = await UserSchema.findOne({ _id: recentIdeas[i].author })
+        recentIdeaAuthor.push(user.name)
+    }
+
+    res.render('index.ejs', { title: 'Idea House', popularIdeas, recentIdeas, popularIdeaAuthor, recentIdeaAuthor })
 })
 
 router.get('/register', blockForAuthenticated, async (req, res) => {
@@ -56,7 +71,7 @@ router.post('/register', async (req, res) => {
             await newUser.save()
 
             getUser(newUser._id).then(() => {
-                res.redirect('/login')
+                res.redirect('/register/terms_and_conditions')
             })
         } catch (e) {
             if (e.message.slice(0, 6) == 'E11000') {

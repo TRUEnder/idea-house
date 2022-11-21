@@ -80,94 +80,64 @@
         <h1><a href="/idea_catalog">Katalog Ide</a></h1>
         <h2><a href="/idea_catalog">Ide Populer</a></h2>
         <div class="idea-list">
-            <div class="idea-item">
-                <image class="idea-thumbnail" src="/img/placeholder.png" />
-                <div class="idea-desc">
-                    <div class="idea-title">Title</div>
-                    <div class="idea-text">Description is here</div>
-                </div>
-            </div>
-            <div class="idea-item">
-                <image class="idea-thumbnail" src="/img/placeholder.png" />
-                <div class="idea-desc">
-                    <div class="idea-title">Title</div>
-                    <div class="idea-text">Description is here</div>
-                </div>
-            </div>
-            <div class="idea-item">
-                <image class="idea-thumbnail" src="/img/placeholder.png" />
-                <div class="idea-desc">
-                    <div class="idea-title">Title</div>
-                    <div class="idea-text">Description is here</div>
-                </div>
-            </div>
-            <div class="idea-item">
-                <image class="idea-thumbnail" src="/img/placeholder.png" />
-                <div class="idea-desc">
-                    <div class="idea-title">Title</div>
-                    <div class="idea-text">Description is here</div>
-                </div>
-            </div>
-            <div class="idea-item">
-                <image class="idea-thumbnail" src="/img/placeholder.png" />
-                <div class="idea-desc">
-                    <div class="idea-title">Title</div>
-                    <div class="idea-text">Description is here</div>
-                </div>
-            </div>
-            <div class="idea-item">
-                <image class="idea-thumbnail" src="/img/placeholder.png" />
-                <div class="idea-desc">
-                    <div class="idea-title">Title</div>
-                    <div class="idea-text">Description is here</div>
-                </div>
-            </div>
+
+            <% for (let i=0; i < popularIdeas.length; i++) { %>
+                <a href=<%=`/post/${popularIdeas[i]._id.toString()}` %> >
+                    <div class="idea-item">
+                        <image class="idea-thumbnail" src="/img/thumbnail_placeholder.jpg" loading="lazy" />
+                        <div class="idea-desc d-flex flex-column gap-2">
+                            <div class="idea-title">
+                                <%= popularIdeas[i].title %>
+                            </div>
+                            <div class="idea-author">
+                                <%= popularIdeaAuthor[i] %>
+                            </div>
+                            <div class="idea-feedback d-flex justify-content-end gap-3">
+                                <div class="like-count d-flex gap-1">
+                                    <div class="bi bi-heart-fill" style="color: red;"></div>
+                                    <%= popularIdeas[i].like %>
+                                </div>
+                                <div class="view-count d-flex gap-1">
+                                    <div class="bi bi-eye"></div>
+                                    <%= popularIdeas[i].views %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <% } %>
+
         </div>
 
-        <h2><a href="idea_catalog.html">Proyek Populer</a></h2>
+        <h2><a href="/idea_catalog">Ide Terbaru</a></h2>
         <div class="idea-list">
-            <div class="idea-item">
-                <image class="idea-thumbnail" src="/img/placeholder.png" />
-                <div class="idea-desc">
-                    <div class="idea-title">Title</div>
-                    <div class="idea-text">Description is here</div>
-                </div>
-            </div>
-            <div class="idea-item">
-                <image class="idea-thumbnail" src="/img/placeholder.png" />
-                <div class="idea-desc">
-                    <div class="idea-title">Title</div>
-                    <div class="idea-text">Description is here</div>
-                </div>
-            </div>
-            <div class="idea-item">
-                <image class="idea-thumbnail" src="/img/placeholder.png" />
-                <div class="idea-desc">
-                    <div class="idea-title">Title</div>
-                    <div class="idea-text">Description is here</div>
-                </div>
-            </div>
-            <div class="idea-item">
-                <image class="idea-thumbnail" src="/img/placeholder.png" />
-                <div class="idea-desc">
-                    <div class="idea-title">Title</div>
-                    <div class="idea-text">Description is here</div>
-                </div>
-            </div>
-            <div class="idea-item">
-                <image class="idea-thumbnail" src="/img/placeholder.png" />
-                <div class="idea-desc">
-                    <div class="idea-title">Title</div>
-                    <div class="idea-text">Description is here</div>
-                </div>
-            </div>
-            <div class="idea-item">
-                <image class="idea-thumbnail" src="/img/placeholder.png" />
-                <div class="idea-desc">
-                    <div class="idea-title">Title</div>
-                    <div class="idea-text">Description is here</div>
-                </div>
-            </div>
+
+            <% for(let i=0; i < recentIdeas.length; i++) { %>
+                <a href=<%=`/post/${recentIdeas[i]._id.toString()}` %> >
+                    <div class="idea-item">
+                        <image class="idea-thumbnail" src="/img/thumbnail_placeholder.jpg" loading="lazy" />
+                        <div class="idea-desc d-flex flex-column gap-2">
+                            <div class="idea-title">
+                                <%= recentIdeas[i].title %>
+                            </div>
+                            <div class="idea-author">
+                                <%= recentIdeaAuthor[i] %>
+                            </div>
+                            <div class="idea-feedback d-flex justify-content-end gap-3">
+                                <div class="like-count d-flex gap-1">
+                                    <div class="bi bi-heart-fill" style="color: red;"></div>
+                                    <%= recentIdeas[i].like %>
+                                </div>
+                                <div class="view-count d-flex gap-1">
+                                    <div class="bi bi-eye"></div>
+                                    <%= recentIdeas[i].views %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <% } %>
+
         </div>
 
         <h2><a href="/idea_catalog">Kategori</a></h2>

@@ -717,18 +717,18 @@ header .header-right {
 }
 
 .idea-sidebar button {
-    height: 40px;
-    width: 200px;
+    height: 30px;
+    width: 130px;
     align-self: center;
-    background: #8E8E8E;
+    background: #ffc935;
     border-radius: 10px;
     padding: 10px 50px 10px 50px;
 
     font-size: 16px;
     font-weight: 700;
-    color: #FFFFFF;
     align-items: center;
     text-align: center;
+    margin-top: 20px;
 }
 
 /* upload_idea.html */
@@ -1119,7 +1119,7 @@ header .header-right {
 }
 
 .profile-info .profile-name>h1 {
-    font-size: 48px;
+    font-size: 38px;
     font-weight: 600;
     line-height: 58px;
     margin: 18px 0px;

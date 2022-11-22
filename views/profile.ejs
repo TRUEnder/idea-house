@@ -58,7 +58,7 @@
                     <h1>
                         <%= user.name%>
                     </h1>
-                    <i class="bi bi-pencil-square" style="font-size: 30px"></i>
+
                 </section>
                 <section class="profile-data">
                     <p id="data-post">
@@ -112,79 +112,18 @@
                     </a>
                     <section class="idea-item-right">
                         <% if (post.thumbnail==null) { %>
-                            <img class="idea-img" id="post-img" src="/img/placeholder.png"></img>
+                            <img class="idea-img" id="post-img" src="/img/thumbnail_placeholder.jpg"></img>
                             <% } else { %>
                                 <img class="idea-img" id="post-img" src="/img/idea_1.png"></img>
                                 <% } %>
-                                    <button class="idea-action">Mulai Kampanye</button>
+                                    <button class="idea-action" style="background-color: #727272 !important">Mulai
+                                        Kampanye</button>
                     </section>
                 </section>
                 <% }) %>
         </section>
 
         <section id="projects-content" style="display: none;">
-
-            <section class="idea-item">
-                <section class="idea-item-left">
-                    <h2 class="idea-name">Managing non-trivial internet-of-things systems with conversational assistants
-                    </h2>
-                    <p class="idea-description">Integer dignissim dui ac mauris ultricies pretium. Aliquam blandit,
-                        lectus eget
-                        eleifend posuere, felis arcu iaculis massa, in consequat ante leo a purus.</p>
-                    <section class="idea-data">
-                        <img class="idea-author" src="/img/placeholder.png" alt="Foto profil pembuat pos"></img>
-                        <p class="idea-author">Jack Separo</p>
-                        <img class="idea-stats" src="/img/placeholder.png" alt="Gambar hati"></img>
-                        <p class="idea-stats">14</p>
-                        <img class="idea-stats" src="/img/placeholder.png" alt="Gambar mata"></img>
-                        <p class="idea-stats">100 tayangan</p>
-                    </section>
-                </section>
-                <section class="idea-item-right">
-                    <img class="idea-img"></img>
-                    <button class="idea-action">Mulai Penggalangan Dana</button>
-                </section>
-            </section>
-            <section class="idea-item">
-                <section class="idea-item-left">
-                    <h2 class="idea-name">Agility Enablers in Production Networks</h2>
-                    <p class="idea-description">Integer dignissim dui ac mauris ultricies pretium. Aliquam blandit,
-                        lectus eget
-                        eleifend posuere, felis arcu iaculis massa, in consequat ante leo a purus.</p>
-                    <section class="idea-data">
-                        <img class="idea-author" src="/img/placeholder.png" alt="Foto profil pembuat pos"></img>
-                        <p class="idea-author">Jack Separo</p>
-                        <img class="idea-stats" src="/img/placeholder.png" alt="Gambar hati"></img>
-                        <p class="idea-stats">9</p>
-                        <img class="idea-stats" src="/img/placeholder.png" alt="Gambar mata"></img>
-                        <p class="idea-stats">65 tayangan</p>
-                    </section>
-                </section>
-                <section class="idea-item-right">
-                    <img class="idea-img"></img>
-                    <button class="idea-action fundraised">Fundraised</button>
-                </section>
-            </section>
-            <section class=idea-item>
-                <section class="idea-item-left">
-                    <h2 class="idea-name">A hybrid method for pavement crack width measurement</h2>
-                    <p class="idea-description">Integer dignissim dui ac mauris ultricies pretium. Aliquam blandit,
-                        lectus eget
-                        eleifend posuere, felis arcu iaculis massa, in consequat ante leo a purus.</p>
-                    <section class="idea-data">
-                        <img class="idea-author" src="/img/placeholder.png" alt="Foto profil pembuat pos"></img>
-                        <p class="idea-author">Jack Separo</p>
-                        <img class="idea-stats" src="/img/placeholder.png" alt="Gambar hati"></img>
-                        <p class="idea-stats">13</p>
-                        <img class="idea-stats" src="/img/placeholder.png" alt="Gambar mata"></img>
-                        <p class="idea-stats">90 tayangan</p>
-                    </section>
-                </section>
-                <section class="idea-item-right">
-                    <img class="idea-img"></img>
-                    <button class="idea-action">Mulai Penggalangan Dana</button>
-                </section>
-            </section>
         </section>
         <section id="fundraised-content" style="display: none;">
         </section>

@@ -60,6 +60,7 @@
                 oldTab = oldSelect.id.slice(0, -"-tab".length) + "-content";
                 document.getElementById(oldTab).style.display = "none";
                 newSelect.className = "profile-tab selected";
+                newSelect.style.fontWeight = 800;
                 newTab = newSelect.id.slice(0, -"-tab".length) + "-content";
                 document.getElementById(newTab).style.display = "flex";
             }

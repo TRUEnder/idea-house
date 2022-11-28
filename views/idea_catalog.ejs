@@ -1,7 +1,7 @@
 <% if (!req.isAuthenticated()) { %>
   <header>
     <div class="header-left">
-      <a href="/"><img class="logo" src="img/idea-house.png" alt="Logo" /></a>
+      <a href="/"><img class="logo" src="/img/idea-house.png" alt="Logo" /></a>
     </div>
 
     <div class="header-center">
@@ -77,74 +77,104 @@
         <section class="catalog-category">
           <h2>Kategori</h2>
           <section class="category-tabs">
-            <p class="category-tab selected" id="ideas-tab" onclick="switchCategoryTab(this)">Ide Populer</p>
-            <p class="category-tab" id="projects-tab" onclick="switchCategoryTab(this)">Project Populer</p>
-            <p class="category-tab" id="home-and-kitchen-tab" onclick="switchCategoryTab(this)">Rumah & Dapur</p>
-            <p class="category-tab" id="it-and-software-tab" onclick="switchCategoryTab(this)">IT & Software</p>
-            <p class="category-tab" id="engineering-tab" onclick="switchCategoryTab(this)">Engineering</p>
-            <p class="category-tab" id="sports-tab" onclick="switchCategoryTab(this)">Olahraga</p>
+            <a href="/idea_catalog/?category=all&page=1">
+              <p class="category-tab selected" id="ideas-tab">Ide Populer</p>
+            </a>
+            <a href="/idea_catalog/?category=Home&page=1">
+              <p class="category-tab" id="home-and-kitchen-tab">Home & Kitchen</p>
+            </a>
+            <a href="/idea_catalog/?category=IT&page=1">
+              <p class="category-tab" id="it-and-software-tab">IT & Software</p>
+            </a>
+            <a href="/idea_catalog/?category=Engineering&page=1">
+              <p class="category-tab" id="engineering-tab">Engineering</p>
+            </a>
+            <a href="/idea_catalog/?category=Sport&page=1">
+              <p class="category-tab" id="sports-tab">Sport Utilities</p>
+            </a>
+            <a href="/idea_catalog/?category=Fashion&page=1">
+              <p class="category-tab" id="fashion-tab">Fashion</p>
+            </a>
+            <a href="/idea_catalog/?category=Entertainment&page=1">
+              <p class="category-tab" id="entertainment-tab">Entertainment</p>
+            </a>
           </section>
         </section>
 
         <section class="catalog-idea">
           <h1>Katalog Ide</h1>
-          <section id="ideas-content">
 
-            <% ideasData.forEach((idea)=> { %>
-              <% const postUrl=`/post/${idea.id}` %>
-                <a href=<%=postUrl %>>
-                  <section class="idea-item">
-                    <section class="idea-item-left">
-                      <h2 class="idea-name">
-                        <%= idea.title %>
-                      </h2>
-                      <p class="idea-description">
-                        <% if (idea.content.length> 140 ) {%>
-                          <%= idea.content.slice(0, 140).concat(' ...') %>
+          <section class="idea-container">
+            <% if (ideasData.length==0) { %>
+              <div class="no-idea d-flex flex-column justify-content-center align-items-center">
+                <img id="no-idea-img" src="/img/empty.png" alt="" />
+                No Idea Found
+              </div>
+              <% } %>
+
+                <% ideasData.forEach((idea)=> { %>
+                  <% const postUrl=`/post/${idea.id}` %>
+                    <a href=<%=postUrl %>>
+                      <section class="idea-item">
+                        <section class="idea-item-left">
+                          <h2 class="idea-name">
+                            <%= idea.title %>
+                          </h2>
+                          <p class="idea-description">
+                            <% if (idea.content.length> 140 ) {%>
+                              <%= idea.content.slice(0, 140).concat(' ...') %>
+                                <% } else { %>
+                                  <%= idea.content %>
+                                    <% } %>
+                          </p>
+                          <section class="idea-data">
+                            <img class="idea-author" src="/img/profile8.png" alt="Foto profil pembuat pos"></img>
+                            <p class="idea-author">
+                              <%= idea.authorName %>
+                            </p>
+                            <span class="fa fa-heart-o"></span>
+                            <p class="idea-stats">
+                              <%= idea.like %>
+                            </p>
+                            <span class="fa fa-eye"></span>
+                            <p class="idea-stats">
+                              <%= idea.views %> tayangan
+                            </p>
+                          </section>
+                        </section>
+                        <section class="idea-item-right">
+                          <% if (idea.thumbnail==null) { %>
+                            <img class="idea-img" id="post-img" src="/img/thumbnail_placeholder.jpg"
+                              loading="lazy"></img>
                             <% } else { %>
-                              <%= idea.content %>
-                                <% } %>
-                      </p>
-                      <section class="idea-data">
-                        <img class="idea-author" src="img/profile8.png" alt="Foto profil pembuat pos"></img>
-                        <p class="idea-author">
-                          <%= idea.authorName %>
-                        </p>
-                        <span class="fa fa-heart-o"></span>
-                        <p class="idea-stats">
-                          <%= idea.like %>
-                        </p>
-                        <span class="fa fa-eye"></span>
-                        <p class="idea-stats">
-                          <%= idea.views %> tayangan
-                        </p>
+                              <img class="idea-img" id="post-img" src="/img/idea_1.png"></img>
+                              <% } %>
+                        </section>
                       </section>
-                    </section>
-                    <section class="idea-item-right">
-                      <% if (idea.thumbnail==null) { %>
-                        <img class="idea-img" id="post-img" src="/img/thumbnail_placeholder.jpg" loading="lazy"></img>
-                        <% } else { %>
-                          <img class="idea-img" id="post-img" src="/img/idea_1.png"></img>
-                          <% } %>
-                    </section>
-                  </section>
+                    </a>
+                    <% }) %>
+          </section>
+
+          <div class="page-nav w-100 d-flex justify-content-center gap-2">
+            <% for (let i=0; i < numPage; i++) { %>
+              <% if ((i+1)==page) { %>
+                <a href=<%=`/idea_catalog/?category=${currCategory}&page=${i+1}` %>>
+                  <div class="page-nav-item d-flex justify-content-center"
+                    style="background-color: #FFC30B; font-weight: 600;">
+                    <%= i+1 %>
+                  </div>
                 </a>
-                <% }) %>
+                <% } else { %>
+                  <a href=<%=`/idea_catalog/?category=${currCategory}&page=${i+1}` %>>
+                    <div class="page-nav-item d-flex justify-content-center">
+                      <%= i+1 %>
+                    </div>
+                  </a>
+                  <% } %>
+                    <% } %>
+          </div>
 
-          </section>
-
-          <section id="projects-content" style="display: none;">
-
-
-          </section>
-          <section id="home-and-kitchen-content" style="display: none;">
-
-          </section>
-          <section id="it-and-software-content" style="display: none;">
-          </section>
-          <section id="engineering-content" style="display: none;">
-          </section>
-          <section id="sports-content" style="display: none;">
-          </section>
         </section>
       </main>
+
+      <%- include('partials/footer') %>

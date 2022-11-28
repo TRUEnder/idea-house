@@ -60,6 +60,11 @@
                     </h1>
 
                 </section>
+                <section>
+                    <p id="user-profile-email">
+                        <%= user.email %>
+                    </p>
+                </section>
                 <section class="profile-data">
                     <p id="data-post">
                         <%= posts.length %> Pos
@@ -71,63 +76,123 @@
                         <%= user.follows.length %> Diikuti
                     </p>
                 </section>
-                <textarea class="profile-bio"
-                    placeholder="Ketik bio Anda di sini...">Interested in engineering</textarea>
             </section>
         </section>
         <section class="profile-tabs">
             <p class="profile-tab selected" id="ideas-tab" onclick="switchProfileTab(this)">Ide</p>
-            <p class="profile-tab" id="projects-tab" onclick="switchProfileTab(this)">Proyek</p>
             <p class="profile-tab" id="likedposts-tab" onclick="switchProfileTab(this)">Pos yang Disukai</p>
         </section>
     </section>
 
     <section class="profile-content">
         <section id="ideas-content">
-            <% posts.forEach((post)=> { const postUrl = `/post/${post._id}` %>
-                <section class="idea-item">
-                    <a href=<%=postUrl%>>
-                        <section class="idea-item-left">
-                            <h2 class="idea-name">
-                                <%= post.title %>
-                            </h2>
-                            <p class="idea-description">
-                                <%= post.content.slice(0, 140).concat(" ...") %>
-                            </p>
-                            <section class="idea-data">
-                                <img class="idea-author" src="/img/profile8.png" alt="Foto profil pembuat pos"></img>
-                                <p class="idea-author">
-                                    <%= user.name %>
-                                </p>
-                                <i class="bi bi-heart"></i>
-                                <p class="idea-stats">
-                                    <%= post.like %>
-                                </p>
-                                <i class="bi bi-eye"></i>
-                                <p class="idea-stats">
-                                    <%= post.views %> tayangan
-                                </p>
+            <% if (posts.length==0) { %>
+                <div class="no-idea d-flex flex-column justify-content-center align-items-center">
+                    <img id="no-idea-img" src="/img/empty.png" alt="" />
+                    No Idea Found
+                </div>
+                <% } %>
+                    <% posts.forEach((post)=> { const postUrl = `/post/${post._id}` %>
+                        <section class="idea-item">
+                            <a href=<%=postUrl%>>
+                                <section class="idea-item-left">
+                                    <h2 class="idea-name">
+                                        <%= post.title %>
+                                    </h2>
+                                    <p class="idea-description-profile">
+                                        <% if (post.content.length> 140 ) {%>
+                                            <%= post.content.slice(0, 140).concat(' ...') %>
+                                                <% } else { %>
+                                                    <%= post.content %>
+                                                        <% } %>
+                                    </p>
+                                    <section class="idea-data">
+                                        <img class="idea-author" src="/img/profile8.png"
+                                            alt="Foto profil pembuat pos"></img>
+                                        <p class="idea-author">
+                                            <%= user.name %>
+                                        </p>
+                                        <i class="bi bi-heart"></i>
+                                        <p class="idea-stats">
+                                            <%= post.like %>
+                                        </p>
+                                        <i class="bi bi-eye"></i>
+                                        <p class="idea-stats">
+                                            <%= post.views %> tayangan
+                                        </p>
+                                    </section>
+                                </section>
+                            </a>
+                            <section class="idea-item-right">
+                                <% if (post.thumbnail==null) { %>
+                                    <img class="idea-img" id="post-img" src="/img/thumbnail_placeholder.jpg"></img>
+                                    <% } else { %>
+                                        <img class="idea-img" id="post-img" src="/img/idea_1.png"></img>
+                                        <% } %>
+                                            <button class="idea-action"
+                                                style="background-color: #727272 !important">Mulai
+                                                Kampanye</button>
                             </section>
                         </section>
-                    </a>
-                    <section class="idea-item-right">
-                        <% if (post.thumbnail==null) { %>
-                            <img class="idea-img" id="post-img" src="/img/thumbnail_placeholder.jpg"></img>
-                            <% } else { %>
-                                <img class="idea-img" id="post-img" src="/img/idea_1.png"></img>
-                                <% } %>
-                                    <button class="idea-action" style="background-color: #727272 !important">Mulai
-                                        Kampanye</button>
-                    </section>
-                </section>
-                <% }) %>
+                        <% }) %>
         </section>
 
-        <section id="projects-content" style="display: none;">
-        </section>
-        <section id="fundraised-content" style="display: none;">
-        </section>
         <section id="likedposts-content" style="display: none;">
+            <% if (likedPosts.length==0) { %>
+                <div class="no-idea d-flex flex-column justify-content-center align-items-center">
+                    <img id="no-idea-img" src="/img/empty.png" alt="" />
+                    No Idea Found
+                </div>
+                <% } %>
+
+                    <% let i=0 %>
+                        <% likedPosts.forEach((post)=> { const postUrl = `/post/${post._id}` %>
+                            <section class="idea-item">
+                                <a href=<%=postUrl%>>
+                                    <section class="idea-item-left">
+                                        <h2 class="idea-name">
+                                            <%= post.title %>
+                                        </h2>
+                                        <p class="idea-description-profile">
+                                            <% if (post.content.length> 140 ) {%>
+                                                <%= post.content.slice(0, 140).concat(' ...') %>
+                                                    <% } else { %>
+                                                        <%= post.content %>
+                                                            <% } %>
+                                        </p>
+                                        <section class="idea-data">
+                                            <img class="idea-author" src="/img/profile8.png"
+                                                alt="Foto profil pembuat pos"></img>
+                                            <p class="idea-author">
+                                                <%= likedAuthor[i].name %>
+                                            </p>
+                                            <i class="bi bi-heart"></i>
+                                            <p class="idea-stats">
+                                                <%= post.like %>
+                                            </p>
+                                            <i class="bi bi-eye"></i>
+                                            <p class="idea-stats">
+                                                <%= post.views %> tayangan
+                                            </p>
+                                        </section>
+                                    </section>
+                                </a>
+                                <section class="idea-item-right">
+                                    <% if (post.thumbnail==null) { %>
+                                        <img class="idea-img" id="post-img" src="/img/thumbnail_placeholder.jpg"></img>
+                                        <% } else { %>
+                                            <img class="idea-img" id="post-img" src="/img/idea_1.png"></img>
+                                            <% } %>
+                                                <button class="idea-action"
+                                                    style="background-color: #727272 !important">Mulai
+                                                    Kampanye</button>
+                                </section>
+                            </section>
+                            <% i++ %>
+                                <% }) %>
+
         </section>
     </section>
 </main>
+
+<%- include('partials/footer') %>

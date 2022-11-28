@@ -73,10 +73,13 @@
         </header>
         <% } %>
 
-            <div class="notFound d-flex justify-content-center align-items-center" style="height: 100%;">
-                <div class="notFound-container" style="text-align: center">
+            <div class="notFound" style="height: 100%;">
+                <div class="notFound-container d-flex flex-column justify-content-center align-items-center"
+                    style="text-align: center">
                     <span>404</span>
                     <br />
                     <h1>Page not found</h1>
                 </div>
             </div>
+
+            <%- include('partials/footer') %>

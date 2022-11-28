@@ -51,12 +51,12 @@
 
 <div id="contents">
     <div class="landing-page-top">
-        <a href="/idea_catalog">Home & Kitchen</a>
-        <a href="/idea_catalog">Sport Utilities</a>
-        <a href="/idea_catalog">IT & Software</a>
-        <a href="/idea_catalog">Engineering</a>
-        <a href="/idea_catalog">Fashion</a>
-        <a href="/idea_catalog">Entertainment</a>
+        <a href="/idea_catalog/?category=Home&page=1">Home & Kitchen</a>
+        <a href="/idea_catalog/?category=Sport&page=1">Sport Utilities</a>
+        <a href="/idea_catalog/?category=IT&page=1">IT & Software</a>
+        <a href="/idea_catalog/?category=Engineering&page=1">Engineering</a>
+        <a href="/idea_catalog/?category=Fashion&page=1">Fashion</a>
+        <a href="/idea_catalog/?category=Entertainment&page=1">Entertainment</a>
     </div>
 
     <div class="landing-page-intro">
@@ -71,15 +71,15 @@
             </div>
             <div id="intro-option">
                 <a href=<%=uploadUrl %> ><button id="post-button">Post Idea</button></a>
-                <a href="/idea_catalog"><button id="catalog-button">Get Some Idea</button></a>
+                <a href="/idea_catalog/?category=all&page=1"><button id="catalog-button">Get Some Idea</button></a>
             </div>
         </div>
         <img id="lamp" src="/img/lamp.png" alt="" />
     </div>
 
     <div class="landing-page-catalog">
-        <h1><a href="/idea_catalog">Katalog Ide</a></h1>
-        <h2><a href="/idea_catalog">Ide Populer</a></h2>
+        <h1><a href="/idea_catalog/?category=all&page=1">Katalog Ide</a></h1>
+        <h2><a href="/idea_catalog/?category=all&page=1">Ide Populer</a></h2>
         <div class="idea-list">
 
             <% for (let i=0; i < popularIdeas.length; i++) { %>
@@ -110,7 +110,7 @@
 
         </div>
 
-        <h2><a href="/idea_catalog">Ide Terbaru</a></h2>
+        <h2><a href="/idea_catalog/?category=all&page=1">Ide Terbaru</a></h2>
         <div class="idea-list">
 
             <% for(let i=0; i < recentIdeas.length; i++) { %>
@@ -141,32 +141,37 @@
 
         </div>
 
-        <h2><a href="/idea_catalog">Kategori</a></h2>
+        <h2><a href="/idea_catalog/?category=all&page=1">Kategori</a></h2>
         <div class="category-list">
-            <div class="category" onclick="location.href='/idea_catalog'" style="cursor: pointer">
+            <div class="category" onclick="location.href='/idea_catalog/?category=Home&page=1'" style="cursor: pointer">
                 <image class="category-thumbnail" src="/img/home-kitchen.png" />
                 <div class="category-desc"><b>Home & Kitchen</b></div>
             </div>
-            <div class="category" onclick="location.href='/idea_catalog'" style="cursor: pointer">
+            <div class="category" onclick="location.href='/idea_catalog?category=IT&page=1'" style="cursor: pointer">
                 <image class="category-thumbnail" src="/img/software.png" />
                 <div class="category-desc"><b>IT & Software</b></div>
             </div>
-            <div class="category" onclick="location.href='/idea_catalog'" style="cursor: pointer">
+            <div class="category" onclick="location.href='/idea_catalog?category=Engineering&page=1'"
+                style="cursor: pointer">
                 <image class="category-thumbnail" src="/img/engineering.png" />
                 <div class="category-desc"><b>Engineering</b></div>
             </div>
-            <div class="category" onclick="location.href='/idea_catalog'" style="cursor: pointer">
+            <div class="category" onclick="location.href='/idea_catalog?category=Sport&page=1'" style="cursor: pointer">
                 <image class="category-thumbnail" src="/img/sport.png" />
                 <div class="category-desc"><b>Sports</b></div>
             </div>
-            <div class="category" onclick="location.href='/idea_catalog'" style="cursor: pointer">
+            <div class="category" onclick="location.href='/idea_catalog?category=Fashion&page=1'"
+                style="cursor: pointer">
                 <image class="category-thumbnail" src="/img/fashion.png" />
                 <div class="category-desc"><b>Fashion</b></div>
             </div>
-            <div class="category" onclick="location.href='/idea_catalog'" style="cursor: pointer">
+            <div class="category" onclick="location.href='/idea_catalog?category=Entertainment&page=1'"
+                style="cursor: pointer">
                 <image class="category-thumbnail" src="/img/entertainment.png" />
                 <div class="category-desc"><b>Entertainment</b></div>
             </div>
         </div>
     </div>
 </div>
+
+<%- include('partials/footer') %>

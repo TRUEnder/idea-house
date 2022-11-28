@@ -9,6 +9,7 @@ router.use(bodyParser.urlencoded({ limit: '10mb', extended: false }))
 const UserSchema = require('../models/userSchema')
 const IdeaSchema = require('../models/ideaSchema')
 const ProjectSchema = require('../models/projectSchema')
+const LikeSchema = require('../models/likeSchema')
 
 // Google Cloud Storage for Image
 const bucketName = 'idea-house-image';
@@ -60,11 +61,24 @@ router.get('/notification', blockForNotAuthenticated, (req, res) => {
 })
 
 router.get('/profile', blockForNotAuthenticated, async (req, res) => {
-    const posts = await IdeaSchema.find({ _id: { $in: user.ideas } })
     const userFollower = await UserSchema.find({ follows: { $all: [user._id] } })
     const followerCount = userFollower.length;
 
-    res.render('profile.ejs', { title: 'Profile', user, posts, followerCount })
+    const posts = await IdeaSchema.find({ _id: { $in: user.ideas } })
+
+    const likedPosts = []
+    const likedAuthor = []
+    const allLikeFromYou = await LikeSchema.find({ user_id: req.user.id })
+    if (allLikeFromYou != null) {
+        for (let i = 0; i < allLikeFromYou.length; i++) {
+            const idea = await IdeaSchema.findOne({ _id: allLikeFromYou[i].idea_id })
+            likedPosts.push(idea)
+            const author = await UserSchema.findOne({ _id: allLikeFromYou[i].user_id })
+            likedAuthor.push(author)
+        }
+    }
+
+    res.render('profile.ejs', { title: 'Profile', user, likedPosts, likedAuthor, posts, followerCount })
 })
 
 router.get('/timeline', blockForNotAuthenticated, (req, res) => {
@@ -87,8 +101,10 @@ router.post('/upload', blockForNotAuthenticated, async (req, res) => {
         await idea.save()
 
         const ideaInstance = await IdeaSchema.findOne({ title: req.body.title, created: now })
-        user.ideas.push(ideaInstance._id)
-        await user.save()
+        const changedUser = await UserSchema.findOne({ _id: user._id })
+        changedUser.ideas.push(ideaInstance._id)
+        await changedUser.save()
+        user.ideas = changedUser.ideas
 
         res.redirect(`/post/${ideaInstance._id}`)
     } catch (e) {
@@ -96,19 +112,50 @@ router.post('/upload', blockForNotAuthenticated, async (req, res) => {
     }
 })
 
+router.delete('/delete/:postId', blockForNotAuthenticated, async (req, res) => {
+    const changedUser = await UserSchema.findOne({ _id: user._id })
+
+    const indexOfIdea = changedUser.ideas.indexOf(req.params.postId)
+    if (indexOfIdea > -1) {
+        changedUser.ideas.splice(indexOfIdea, 1)
+    }
+
+    try {
+        await IdeaSchema.deleteOne({ _id: req.params.postId })
+        await changedUser.save()
+        user.ideas = changedUser.ideas
+    } catch (error) {
+        console.error(error.message)
+    }
+})
+
 router.post('/follow/:authorid/:postid', blockForNotAuthenticated, async (req, res) => {
-    user.follows.push(req.params.authorid)
-    await user.save()
+    const changedUser = await UserSchema.findOne({ _id: user._id })
+    changedUser.follows.push(req.params.authorid)
+
+    try {
+        await changedUser.save()
+        user.follows = changedUser.follows
+    } catch (error) {
+        console.error(error.message)
+    }
 
     res.redirect(`/post/${req.params.postid}`)
 })
 
 router.post('/unfollow/:authorid/:postid', blockForNotAuthenticated, async (req, res) => {
-    const indexOfAuthor = user.follows.indexOf(req.params.authorid)
+    const changedUser = await UserSchema.findOne({ _id: user._id })
+    const indexOfAuthor = changedUser.follows.indexOf(req.params.authorid)
     if (indexOfAuthor > -1) {
-        user.follows.splice(indexOfAuthor, 1)
+        changedUser.follows.splice(indexOfAuthor, 1)
     }
-    user.save()
+
+    try {
+        await changedUser.save()
+        user.follows = changedUser.follows
+    } catch (error) {
+        console.error(error.message)
+    }
 
     res.redirect(`/post/${req.params.postid}`)
 })

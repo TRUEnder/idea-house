@@ -53,8 +53,8 @@
   <% const postUrl=`/users/${user.id}/upload` %>
     <form action=<%=postUrl %> method="POST" class="d-flex">
       <div class="idea-main">
-        <input name="title" type="text" id="input-title" defaultValue="Judul" placeholder="Judul"></input>
-        <textarea name="content" id="input-description" placeholder="Jelaskan ide Anda di sini"></textarea>
+        <input name="title" type="text" id="input-title" defaultValue="Judul" placeholder="Judul" required></input>
+        <textarea name="content" id="input-description" placeholder="Jelaskan ide Anda di sini" required></textarea>
       </div>
 
       <div class="idea-sidebar">

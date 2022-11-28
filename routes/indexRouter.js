@@ -112,7 +112,39 @@ router.get('/register/terms_and_conditions', blockForAuthenticated, (req, res) =
 })
 
 router.get('/idea_catalog', async (req, res) => {
-    const ideas = await IdeaSchema.find()
+
+    let category;
+    switch (req.query.category) {
+        case 'Home':
+            category = 'Home & Kitchen';
+            break;
+        case 'IT':
+            category = 'IT & Software';
+            break;
+        case 'Sport':
+            category = 'Sport Utilities';
+            break;
+        default:
+            category = req.query.category;
+    }
+
+    console.log(category)
+
+    const page = req.query.page
+    const pageSize = 10
+    let numPage;
+    let ideas;
+
+    if (category == 'all') {
+        numPage = Math.ceil(await IdeaSchema.estimatedDocumentCount() / pageSize)
+        ideas = await IdeaSchema.find().skip((page - 1) * pageSize).limit(pageSize)
+
+    } else {
+        numPage = Math.ceil(await IdeaSchema.countDocuments({ categories: { $all: [category] } }) / pageSize)
+        ideas = await IdeaSchema.find({ categories: { $all: [category] } }).skip((page - 1) * pageSize).limit(pageSize)
+    }
+    ideas.forEach((idea) => console.log(idea.categories))
+
     const ideasData = []
     for (let i = 0; i < ideas.length; i++) {
         const author = await UserSchema.findOne({ _id: ideas[i].author })
@@ -133,7 +165,13 @@ router.get('/idea_catalog', async (req, res) => {
         ideasData.push(ideaData)
     }
 
-    res.render('idea_catalog.ejs', { title: 'Idea Catalog', req, ideasData })
+    res.render('idea_catalog.ejs', {
+        title: category != 'all' ? `${category} - Idea Catalog` : 'Popular Idea - Idea Catalog',
+        req,
+        currCategory: req.query.category,
+        page, numPage, ideasData
+    })
+
 })
 
 router.use((req, res) => {

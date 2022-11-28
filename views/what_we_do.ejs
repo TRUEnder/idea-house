@@ -101,7 +101,8 @@
                   <% } else { const url=`/users/${req.user.id}/upload`%>
                     <a href=<%=url %> ><button id="new-idea-button">Bagikan Ide Baru</button></a>
                     <% } %>
-                      <a href="/idea_catalog"><button id="other-idea-button">Lihat Ide Orang Lain</button></a>
+                      <a href="/idea_catalog/?category=all&page=1"><button id="other-idea-button">Lihat Ide Orang
+                          Lain</button></a>
               </div>
             </div>
             <div id="right">
@@ -125,3 +126,5 @@
           </div>
         </div>
       </div>
+
+      <%- include('partials/footer') %>

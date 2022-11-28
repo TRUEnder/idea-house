@@ -78,25 +78,32 @@
           <h2>Kategori</h2>
           <section class="category-tabs">
             <a href="/idea_catalog/?category=all&page=1">
-              <p class="category-tab selected" id="ideas-tab">Ide Populer</p>
+              <p class="category-tab 
+                <%= currCategory == 'all' ? 'selected' : '' %>" id="ideas-tab">Ide Populer</p>
             </a>
             <a href="/idea_catalog/?category=Home&page=1">
-              <p class="category-tab" id="home-and-kitchen-tab">Home & Kitchen</p>
+              <p class="category-tab
+              <%= currCategory == 'Home' ? 'selected' : '' %>" id="home-and-kitchen-tab">Home & Kitchen</p>
             </a>
             <a href="/idea_catalog/?category=IT&page=1">
-              <p class="category-tab" id="it-and-software-tab">IT & Software</p>
+              <p class="category-tab
+              <%= currCategory == 'IT' ? 'selected' : '' %>" id="it-and-software-tab">IT & Software</p>
             </a>
             <a href="/idea_catalog/?category=Engineering&page=1">
-              <p class="category-tab" id="engineering-tab">Engineering</p>
+              <p class="category-tab
+              <%= currCategory == 'Engineering' ? 'selected' : '' %>" id="engineering-tab">Engineering</p>
             </a>
             <a href="/idea_catalog/?category=Sport&page=1">
-              <p class="category-tab" id="sports-tab">Sport Utilities</p>
+              <p class="category-tab
+              <%= currCategory == 'Sport' ? 'selected' : '' %>" id="sports-tab">Sport Utilities</p>
             </a>
             <a href="/idea_catalog/?category=Fashion&page=1">
-              <p class="category-tab" id="fashion-tab">Fashion</p>
+              <p class="category-tab
+              <%= currCategory == 'Fashion' ? 'selected' : '' %>" id="fashion-tab">Fashion</p>
             </a>
             <a href="/idea_catalog/?category=Entertainment&page=1">
-              <p class="category-tab" id="entertainment-tab">Entertainment</p>
+              <p class="category-tab
+              <%= currCategory == 'Entertainment' ? 'selected' : '' %>" id="entertainment-tab">Entertainment</p>
             </a>
           </section>
         </section>

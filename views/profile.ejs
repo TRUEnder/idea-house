@@ -129,9 +129,14 @@
                                     <% } else { %>
                                         <img class="idea-img" id="post-img" src="/img/idea_1.png"></img>
                                         <% } %>
-                                            <button class="idea-action"
-                                                style="background-color: #727272 !important">Mulai
-                                                Kampanye</button>
+                                            <form action=<%=`/users/${user.id}/delete/${post._id}?_method=DELETE` %>
+                                                method="POST">
+                                                <button class="idea-action"
+                                                    style="background-color: #ff1d1d !important">
+                                                    <i class="bi bi-trash"></i>
+                                                    Delete idea
+                                                </button>
+                                            </form>
                             </section>
                         </section>
                         <% }) %>
@@ -183,9 +188,6 @@
                                         <% } else { %>
                                             <img class="idea-img" id="post-img" src="/img/idea_1.png"></img>
                                             <% } %>
-                                                <button class="idea-action"
-                                                    style="background-color: #727272 !important">Mulai
-                                                    Kampanye</button>
                                 </section>
                             </section>
                             <% i++ %>

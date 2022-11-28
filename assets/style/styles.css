@@ -1076,20 +1076,27 @@ header .header-right {
     width: 30px;
 }*/
 
+.idea-item-right {
+    display: center;
+    justify-content: center;
+    align-items: center;
+}
+
 .idea-item .idea-img {
     height: 178px;
     width: 245px;
 }
 
 .idea-item .idea-action {
-    height: 54px;
-    width: 245px;
-    background: #FFC30B;
+    height: 40px;
+    width: 180px;
+    background: #fd1818;
     border: 0px;
+    border-radius: 10px;
 
     color: #FFFFFF;
     font-family: "Roboto";
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 600;
     line-height: 25px;
     align-items: center;
@@ -1156,7 +1163,7 @@ header .header-right {
 #user-profile-email {
     color: rgb(0, 0, 0);
     font-size: 18px;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
 }
 
 .profile-info .profile-data>p {

@@ -12,6 +12,7 @@ router.use(methodOverride('_method'))
 const UserSchema = require('../models/userSchema')
 const IdeaSchema = require('../models/ideaSchema')
 const ProjectSchema = require('../models/projectSchema')
+const LikeSchema = require('../models/likeSchema')
 
 const initializePassport = require('../config/passport-config')
 const passport = initializePassport(
@@ -23,8 +24,11 @@ const passport = initializePassport(
 const blockForAuthenticated = require('../config/blockForAuthenticated')
 const blockForNotAuthenticated = require('../config/blockForNotAuthenticated')
 
-// Get User Info
 const { getUser } = require('../config/currentUser')
+
+
+
+// Routing
 
 router.get('/', blockForAuthenticated, async (req, res) => {
     const popularIdeas = await IdeaSchema.find().limit(4)
@@ -43,6 +47,10 @@ router.get('/', blockForAuthenticated, async (req, res) => {
     }
 
     res.render('index.ejs', { title: 'Idea House', popularIdeas, recentIdeas, popularIdeaAuthor, recentIdeaAuthor })
+})
+
+router.get('/what_we_do', (req, res) => {
+    res.render('what_we_do.ejs', { title: 'What We Do - Idea House', req: req });
 })
 
 router.get('/register', blockForAuthenticated, async (req, res) => {
@@ -91,7 +99,7 @@ router.post('/login', passport.authenticate('local', {
 }),
     (req, res) => {
         getUser(req.user.id).then(() => {
-            res.redirect(`/users/${req.user._id}/`)
+            res.redirect(`/users/${req.user.id}/`)
         })
     }
 )
@@ -101,10 +109,6 @@ router.delete('/logout', (req, res, next) => {
         if (err) return next(e)
         res.redirect('/')
     })
-})
-
-router.get('/what_we_do', (req, res) => {
-    res.render('what_we_do.ejs', { title: 'What We Do', req: req });
 })
 
 router.get('/register/terms_and_conditions', blockForAuthenticated, (req, res) => {
@@ -128,8 +132,6 @@ router.get('/idea_catalog', async (req, res) => {
             category = req.query.category;
     }
 
-    console.log(category)
-
     const page = req.query.page
     const pageSize = 10
     let numPage;
@@ -143,7 +145,6 @@ router.get('/idea_catalog', async (req, res) => {
         numPage = Math.ceil(await IdeaSchema.countDocuments({ categories: { $all: [category] } }) / pageSize)
         ideas = await IdeaSchema.find({ categories: { $all: [category] } }).skip((page - 1) * pageSize).limit(pageSize)
     }
-    ideas.forEach((idea) => console.log(idea.categories))
 
     const ideasData = []
     for (let i = 0; i < ideas.length; i++) {
@@ -171,6 +172,37 @@ router.get('/idea_catalog', async (req, res) => {
         currCategory: req.query.category,
         page, numPage, ideasData
     })
+
+})
+
+router.get('/public/:authorId', async (req, res) => {
+    const author = await UserSchema.findOne({ _id: req.params.authorId })
+    const followerCount = await UserSchema.countDocuments({ follows: { $all: [author._id] } })
+
+    let hasFollow = false
+    if (req.isAuthenticated()) {
+        const user = await UserSchema.findOne({ _id: req.user.id })
+        if (user.follows != null) {
+            hasFollow = user.follows.includes(author._id)
+        }
+    }
+
+    const posts = await IdeaSchema.find({ _id: { $in: author.ideas } })
+
+    const likedPosts = []
+    const likedAuthor = []
+
+    const allLikeFromAuthor = await LikeSchema.find({ user_id: author._id })
+    if (allLikeFromAuthor != null) {
+        for (let i = 0; i < allLikeFromAuthor.length; i++) {
+            const idea = await IdeaSchema.findOne({ _id: allLikeFromAuthor[i].idea_id })
+            likedPosts.push(idea)
+            const author = await UserSchema.findOne({ _id: allLikeFromAuthor[i].user_id })
+            likedAuthor.push(author)
+        }
+    }
+
+    res.render('publicProfile.ejs', { title: `${author.name} - Profile`, req, hasFollow, author, likedPosts, likedAuthor, posts, followerCount })
 
 })
 

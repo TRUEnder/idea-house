@@ -10,7 +10,7 @@ const user = {
 
 async function getUser(id) {
     const result = await UserSchema.findOne({ _id: id })
-    user._id = result._id
+    user.id = result._id
     user.name = result.name
     user.email = result.email
     user.follows = result.follows

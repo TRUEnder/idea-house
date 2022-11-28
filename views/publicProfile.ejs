@@ -1,242 +1,230 @@
-<header>
-  <div class="header-left">
-    <% const url="/users/" + user.id %>
-      <a href=<%=url %>><img class="logo" src="/img/idea-house.png" alt="Logo" /></a>
-  </div>
-  <div class="header-center">
-    <a href="/what_we_do">What we do?</a>
-    <a>How to use</a>
-  </div>
-  <div class="header-right">
+<% if (!req.isAuthenticated()) { %>
+  <header>
+    <div class="header-left">
+      <a href="/"><img class="logo" src="/img/idea-house.png" alt="Logo" /></a>
+    </div>
 
-    <% const timelineUrl=url + "/timeline" ; const uploadUrl=url + "/upload" ; const notifUrl=url + "/notification" ;
-      const chatUrl=url + "/chat" ; const profileUrl=url + "/profile" %>
+    <div class="header-center">
+      <a href="/what_we_do">What we do?</a>
+      <a>How to use</a>
+    </div>
 
-      <div class="timeline"><a href=<%=timelineUrl%>>Timeline</a></div>
-      <a href=<%=uploadUrl %>><span class="fa fa-plus-square-o"></span></a>
-      <a href=<%=notifUrl %>><span class="fa fa-bell-o"></span></a>
-      <a href=<%=chatUrl %>><i class="bi bi-chat-left-text"></i></a>
-      <div class="profile-dropdown">
-        <img id="profile-button" onclick="toggleProfileMenu()" src="/img/profile8.png" />
-        <div id="profile-menu">
-          <a href=<%=profileUrl %>>
-            <div id="profile-menu-head">
-              <img id="profile-picture" src="/img/profile8.png" />
-              <div>
-                <p id="profile-name">
-                  <%= user.name %>
-                </p>
-                <p id="profile-email">
-                  <%= user.email %>
-                </p>
+    <div class="header-right">
+      <a href="/login">
+        <div>Login</div>
+      </a>
+      <a href="/register">
+        <div>Register</div>
+      </a>
+  </header>
+
+  <% } else { %>
+
+    <header>
+      <div class="header-left">
+        <% const url="/users/" + req.user.id %>
+          <a href=<%=url %>><img class="logo" src="/img/idea-house.png" alt="Logo" /></a>
+      </div>
+      <div class="header-center">
+        <a href="/what_we_do">What we do?</a>
+        <a>How to use</a>
+      </div>
+      <div class="header-right">
+
+        <% const timelineUrl=url + "/timeline" ; const uploadUrl=url + "/upload" ; const notifUrl=url + "/notification"
+          ; const chatUrl=url + "/chat" ; const profileUrl=url + "/profile" %>
+
+          <div class="timeline"><a href=<%=timelineUrl%>>Timeline</a></div>
+          <a href=<%=uploadUrl %>><span class="fa fa-plus-square-o"></span></a>
+          <a href=<%=notifUrl %>><span class="fa fa-bell-o"></span></a>
+          <a href=<%=chatUrl %>><i class="bi bi-chat-left-text"></i></a>
+          <div class="profile-dropdown">
+            <img id="profile-button" onclick="toggleProfileMenu()" src="/img/profile8.png" />
+            <div id="profile-menu">
+              <a href=<%=profileUrl %>>
+                <div id="profile-menu-head">
+                  <img id="profile-picture" src="/img/profile8.png" />
+                  <div>
+                    <p id="profile-name">
+                      <%= req.user.name %>
+                    </p>
+                    <p id="profile-email">
+                      <%= req.user.email %>
+                    </p>
+                  </div>
+                </div>
+              </a>
+              <div id="profile-menu-list">
+                <a href=<%=profileUrl%> class="profile-menu-item">Edit profil</a>
+                <a href=<%=profileUrl%> class="profile-menu-item">Ide</a>
+                <a href=<%=profileUrl%> class="profile-menu-item">Proyek</a>
+                <a href=<%=profileUrl%> class="profile-menu-item">Liked</a>
+              </div>
+              <div id="profile-menu-logout">
+                <form action="/logout?_method=DELETE" method="POST">
+                  <button type="submit" class="btn btn-link" style="color: red; text-decoration: none;">Log
+                    Out</button>
+                </form>
               </div>
             </div>
-          </a>
-          <div id="profile-menu-list">
-            <a href=<%=profileUrl%> class="profile-menu-item">Edit profil</a>
-            <a href=<%=profileUrl%> class="profile-menu-item">Ide</a>
-            <a href=<%=profileUrl%> class="profile-menu-item">Proyek</a>
-            <a href=<%=profileUrl%> class="profile-menu-item">Liked</a>
           </div>
-          <div id="profile-menu-logout">
-            <form action="/logout?_method=DELETE" method="POST">
-              <button type="submit" class="btn btn-link" style="color: red; text-decoration: none;">Log
-                Out</button>
-            </form>
-          </div>
-        </div>
       </div>
-  </div>
-</header>
+    </header>
+    <% } %>
 
-<main id="contents">
-  <section class="profile-intro">
-    <section class="profile-info">
-      <img class="profile-picture" src="/img/placeholder.png" alt="Foto profil pengguna"></img>
-      <section class="profile-description">
-        <section class="profile-name">
-          <h1>
-            <%= user.name %>
-          </h1>
-          // <img src="/img/placeholder.png" alt="Edit profil"></img>
-        </section>
-        <!--
-          <section class="profile-data">
-            <p id="data-post">10 Pos</p>
-            <p id="data-follower">100 Pengikut</p>
-            <p id="data-following">105 Diikuti</p>
-          </section> Hidden di Profil Publik-->
-        <section class="profile-interaction">
-          <button>Unfollow</button>
-          <img src="/img/placeholder.png" alt="Simbol Pesan"></img>
-        </section>
-        <!--Hidden di Profil Pribadi-->
-        <!--
-          <textarea class="profile-bio" placeholder="Ketik bio Anda di sini...">Interested in engineering</textarea> Hidden di Profil Publik-->
-        <p class="profile-bio">Deskripsi</p>
-        <!--Hidden di Profil Pribadi -->
-      </section>
-    </section>
-    <section class="profile-tabs">
-      <p class="profile-tab selected" id="ideas-tab" onclick="switchProfileTab(this)">Ide</p>
-      <p class="profile-tab" id="projects-tab" onclick="switchProfileTab(this)">Proyek</p>
-      <p class="profile-tab" id="fundraised-tab" onclick="switchProfileTab(this)">Fundraised</p>
-      <!--
-        <p class="profile-tab" id="likedposts-tab" onclick="switchProfileTab(this)">Pos yang Disukai</p> Hidden in Profil Publik -->
-    </section>
-  </section>
+      <main id="contents">
+        <section class="profile-intro">
+          <section class="profile-info">
+            <img class="profile-picture" src="/img/profile6.png" alt="Foto profil pengguna"></img>
+            <section class="profile-description">
+              <section class="profile-name">
+                <h1>
+                  <%= author.name%>
+                </h1>
+              </section>
+              <section>
+                <p id="user-profile-email">
+                  <%= author.email %>
+                </p>
+              </section>
+              <section class="profile-data">
+                <p id="data-post">
+                  <%= posts.length %> Pos
+                </p>
+                <p id="data-follower">
+                  <%= followerCount %> Pengikut
+                </p>
+                <p id="data-following">
+                  <%= author.follows.length %> Diikuti
+                </p>
+              </section>
 
-  <section class="profile-content">
-    <section id="ideas-content">
-      <!--Not hidden by default -->
-      <section class="idea-item">
-        <section class="idea-item-left">
-          <h2 class="idea-name">The Realization of Regular Clocking-Based </h2>
-          <p class="idea-description">Integer dignissim dui ac mauris ultricies pretium. Aliquam blandit, lectus eget
-            eleifend posuere, felis arcu iaculis massa, in consequat ante leo a purus.</p>
-          <section class="idea-data">
-            <img class="idea-author" src="/img/placeholder.png" alt="Foto profil pembuat pos"></img>
-            <p class="idea-author">
-              <%= user.name %>
-            </p>
-            <img class="idea-stats" src="/img/placeholder.png" alt="Gambar hati"></img>
-            <p class="idea-stats">10</p>
-            <img class="idea-stats" src="/img/placeholder.png" alt="Gambar mata"></img>
-            <p class="idea-stats">70 tayangan</p>
+              <% if(req.isAuthenticated()) { %>
+                <% if( !(req.user.id==author._id) ) { %>
+                  <section>
+                    <% if(!hasFollow) { %>
+                      <form method='POST' action=<%=`/users/${req.user.id}/follow/profile/${author._id}` %>>
+                        <button type="submit" class="follow-author"
+                          style="background-color: #FFFFFF; color: #FFC30B; border: 1px solid #FFC30B;">Follow</button>
+                      </form>
+                      <% } else { %>
+                        <form method='POST' action=<%=`/users/${req.user.id}/unfollow/profile/${author._id}` %>>
+                          <button type="submit" class="follow-author"
+                            style="background-color: #3b3b3b; color: #ffffff;">Unfollow</button>
+                        </form>
+                        <% } %>
+                  </section>
+                  <% } } %>
+
+            </section>
+          </section>
+          <section class="profile-tabs">
+            <p class="profile-tab selected" id="ideas-tab" onclick="switchProfileTab(this)">Ide</p>
+            <p class="profile-tab" id="likedposts-tab" onclick="switchProfileTab(this)">Pos yang Disukai</p>
           </section>
         </section>
-        <section class="idea-item-right">
-          <img class="idea-/img"></img>
-          <!--
-            <button class="idea-action">Mulai Kampanye</button> Hidden di Profil Publik -->
-        </section>
-      </section>
-      <section class="idea-item">
-        <section class="idea-item-left">
-          <h2 class="idea-name">Determination of circulation ratio of natural circulation boiler for a wide range of
-            pressure</h2>
-          <p class="idea-description">Integer dignissim dui ac mauris ultricies pretium. Aliquam blandit, lectus eget
-            eleifend posuere, felis arcu iaculis massa, in consequat ante leo a purus.</p>
-          <!-- Gaya lama pakai flex
-            <section class="idea-data">
-              <section class="idea-author">
-                <img src="/img/placeholder.png" alt="Foto profil pembuat pos"><//img>
-                <p>Jack Separo</p>
-              </section>
-              <section class="idea-stats">
-                <section>
-                  <img src="/img/placeholder.png" alt="Gambar hati"><//img>
-                  <p>19</p>
-                </section>
-                <section>
-                  <img src="/img/placeholder.png" alt="Gambar mata"><//img>
-                  <p>134 tayangan</p>
-                </section>
-              </section>
-            </section>-->
-          <section class="idea-data">
-            <img class="idea-author" src="/img/placeholder.png" alt="Foto profil pembuat pos"></img>
-            <p class="idea-author">Jack Separo</p>
-            <img class="idea-stats" src="/img/placeholder.png" alt="Gambar hati"></img>
-            <p class="idea-stats">19</p>
-            <img class="idea-stats" src="/img/placeholder.png" alt="Gambar mata"></img>
-            <p class="idea-stats">134 tayangan</p>
+
+        <section class="profile-content">
+          <section id="ideas-content">
+            <% if (posts.length==0) { %>
+              <div class="no-idea d-flex flex-column justify-content-center align-items-center">
+                <img id="no-idea-img" src="/img/empty.png" alt="" />
+                No Idea Found
+              </div>
+              <% } %>
+                <% posts.forEach((post)=> { const postUrl = `/post/${post._id}` %>
+                  <section class="idea-item">
+                    <a href=<%=postUrl%>>
+                      <section class="idea-item-left">
+                        <h2 class="idea-name">
+                          <%= post.title %>
+                        </h2>
+                        <p class="idea-description-profile">
+                          <% if (post.content.length> 140 ) {%>
+                            <%= post.content.slice(0, 140).concat(' ...') %>
+                              <% } else { %>
+                                <%= post.content %>
+                                  <% } %>
+                        </p>
+                        <section class="idea-data">
+                          <img class="idea-author" src="/img/profile9.png" alt="Foto profil pembuat pos"></img>
+                          <p class="idea-author">
+                            <%= author.name %>
+                          </p>
+                          <i class="bi bi-heart"></i>
+                          <p class="idea-stats">
+                            <%= post.like %>
+                          </p>
+                          <i class="bi bi-eye"></i>
+                          <p class="idea-stats">
+                            <%= post.views %> tayangan
+                          </p>
+                        </section>
+                      </section>
+                    </a>
+                    <section class="idea-item-right">
+                      <% if (post.thumbnail==null) { %>
+                        <img class="idea-img" id="post-img" src="/img/thumbnail_placeholder.jpg"></img>
+                        <% } else { %>
+                          <img class="idea-img" id="post-img" src="/img/idea_1.png"></img>
+                          <% } %>
+                    </section>
+                  </section>
+                  <% }) %>
+          </section>
+
+          <section id="likedposts-content" style="display: none;">
+            <% if (likedPosts.length==0) { %>
+              <div class="no-idea d-flex flex-column justify-content-center align-items-center">
+                <img id="no-idea-img" src="/img/empty.png" alt="" />
+                No Idea Found
+              </div>
+              <% } %>
+
+                <% let i=0 %>
+                  <% likedPosts.forEach((post)=> { const postUrl = `/post/${post._id}` %>
+                    <section class="idea-item">
+                      <a href=<%=postUrl%>>
+                        <section class="idea-item-left">
+                          <h2 class="idea-name">
+                            <%= post.title %>
+                          </h2>
+                          <p class="idea-description-profile">
+                            <% if (post.content.length> 140 ) {%>
+                              <%= post.content.slice(0, 140).concat(' ...') %>
+                                <% } else { %>
+                                  <%= post.content %>
+                                    <% } %>
+                          </p>
+                          <section class="idea-data">
+                            <img class="idea-author" src="/img/profile8.png" alt="Foto profil pembuat pos"></img>
+                            <p class="idea-author">
+                              <%= likedAuthor[i].name %>
+                            </p>
+                            <i class="bi bi-heart"></i>
+                            <p class="idea-stats">
+                              <%= post.like %>
+                            </p>
+                            <i class="bi bi-eye"></i>
+                            <p class="idea-stats">
+                              <%= post.views %> tayangan
+                            </p>
+                          </section>
+                        </section>
+                      </a>
+                      <section class="idea-item-right">
+                        <% if (post.thumbnail==null) { %>
+                          <img class="idea-img" id="post-img" src="/img/thumbnail_placeholder.jpg"></img>
+                          <% } else { %>
+                            <img class="idea-img" id="post-img" src="/img/idea_1.png"></img>
+                            <% } %>
+                      </section>
+                    </section>
+                    <% i++ %>
+                      <% }) %>
+
           </section>
         </section>
-        <section class="idea-item-right">
-          <img class="idea-/img"></img>
-          <!--
-            <button class="idea-action">Mulai Kampanye</button> Hidden di Profil Publik -->
-        </section>
-      </section>
-      <section class=idea-item>
-        <section class="idea-item-left">
-          <h2 class="idea-name">Stakeholder Contributions to Understanding Infrastructure Impacts of The Tollroads
-            Highway in Indonesia</h2>
-          <p class="idea-description">Integer dignissim dui ac mauris ultricies pretium. Aliquam blandit, lectus eget
-            eleifend posuere, felis arcu iaculis massa, in consequat ante leo a purus.</p>
-          <section class="idea-data">
-            <img class="idea-author" src="/img/placeholder.png" alt="Foto profil pembuat pos"></img>
-            <p class="idea-author">Jack Separo</p>
-            <img class="idea-stats" src="/img/placeholder.png" alt="Gambar hati"></img>
-            <p class="idea-stats">19</p>
-            <img class="idea-stats" src="/img/placeholder.png" alt="Gambar mata"></img>
-            <p class="idea-stats">134 tayangan</p>
-          </section>
-        </section>
-        <section class="idea-item-right">
-          <img class="idea-/img"></img>
-          <!--
-            <button class="idea-action">Mulai Kampanye</button> Hidden di Profil Publik -->
-        </section>
-      </section>
-    </section>
-    <section id="projects-content" style="display: none;">
-      <section class="idea-item">
-        <section class="idea-item-left">
-          <h2 class="idea-name">Managing non-trivial internet-of-things systems with conversational assistants</h2>
-          <p class="idea-description">Integer dignissim dui ac mauris ultricies pretium. Aliquam blandit, lectus eget
-            eleifend posuere, felis arcu iaculis massa, in consequat ante leo a purus.</p>
-          <section class="idea-data">
-            <img class="idea-author" src="/img/placeholder.png" alt="Foto profil pembuat pos"></img>
-            <p class="idea-author">Jack Separo</p>
-            <img class="idea-stats" src="/img/placeholder.png" alt="Gambar hati"></img>
-            <p class="idea-stats">14</p>
-            <img class="idea-stats" src="/img/placeholder.png" alt="Gambar mata"></img>
-            <p class="idea-stats">100 tayangan</p>
-          </section>
-        </section>
-        <section class="idea-item-right">
-          <img class="idea-/img"></img>
-          <!--
-            <button class="idea-action">Mulai Penggalangan Dana</button> Hidden di Profil Publik -->
-        </section>
-      </section>
-      <section class="idea-item">
-        <section class="idea-item-left">
-          <h2 class="idea-name">Agility Enablers in Production Networks</h2>
-          <p class="idea-description">Integer dignissim dui ac mauris ultricies pretium. Aliquam blandit, lectus eget
-            eleifend posuere, felis arcu iaculis massa, in consequat ante leo a purus.</p>
-          <section class="idea-data">
-            <img class="idea-author" src="/img/placeholder.png" alt="Foto profil pembuat pos"></img>
-            <p class="idea-author">Jack Separo</p>
-            <img class="idea-stats" src="/img/placeholder.png" alt="Gambar hati"></img>
-            <p class="idea-stats">9</p>
-            <img class="idea-stats" src="/img/placeholder.png" alt="Gambar mata"></img>
-            <p class="idea-stats">65 tayangan</p>
-          </section>
-        </section>
-        <section class="idea-item-right">
-          <img class="idea-/img"></img>
-          <!--
-            <button class="idea-action fundraised">Fundraised</button> Hidden di Profil Publik -->
-        </section>
-      </section>
-      <section class=idea-item>
-        <section class="idea-item-left">
-          <h2 class="idea-name">A hybrid method for pavement crack width measurement</h2>
-          <p class="idea-description">Integer dignissim dui ac mauris ultricies pretium. Aliquam blandit, lectus eget
-            eleifend posuere, felis arcu iaculis massa, in consequat ante leo a purus.</p>
-          <section class="idea-data">
-            <img class="idea-author" src="/img/placeholder.png" alt="Foto profil pembuat pos"></img>
-            <p class="idea-author">Jack Separo</p>
-            <img class="idea-stats" src="/img/placeholder.png" alt="Gambar hati"></img>
-            <p class="idea-stats">13</p>
-            <img class="idea-stats" src="/img/placeholder.png" alt="Gambar mata"></img>
-            <p class="idea-stats">90 tayangan</p>
-          </section>
-        </section>
-        <section class="idea-item-right">
-          <img class="idea-/img"></img>
-          <!--
-            <button class="idea-action">Mulai Penggalangan Dana</button> Hidden di Profil Publik -->
-        </section>
-      </section>
-    </section>
-    <section id="fundraised-content" style="display: none;">
-    </section>
-    <!--
-      <section id="likedposts-content" style="display: none;">
-      </section> Hidden in Profil Publik-->
-  </section>
-</main>
+      </main>
+
+      <%- include('partials/footer') %>

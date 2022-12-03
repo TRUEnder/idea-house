@@ -1,7 +1,0 @@
-app = "idea-house"
-[build]
-  image = "truender/idea-house:latest"
-
-
-[[services]]
-  internal_port = 3000
